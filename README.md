@@ -89,6 +89,10 @@ The 17 character VIN:
 ## 使用方法
 提供web查询服务
 
+* http://127.0.0.1/vin/v1/LVSHCAMB1CE054249
+* http://127.0.0.1/wmi/v1/LSV
+* http://127.0.0.1/vin/v1/checksum/LVSHCAMB1CE054249
+
 请求
 ```shell
 curl http://127.0.0.1/vin/v1/LVSHCAMB1CE054249
