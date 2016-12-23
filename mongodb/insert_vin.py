@@ -11,7 +11,7 @@ db = client["vin"]
 
 collection = db["vin"]
 data = {
-    "vin": "LSVAM4187C2184847",
+    "vincode": "LSVAM4187C2184847",
     "厂家": "一汽大众(奥迪)",
     "品牌": "奥迪",
     "车型": "Q5",
@@ -28,7 +28,7 @@ data = {
 collection.insert(data)
 
 data = {
-    "vin": "LVSHCAMB1CE054249",
+    "vincode": "LVSHCAMB1CE054249",
     "车型": "福克斯-两厢", 
     "厂家": "长安福特马自达", 
     "品牌": "福特", 
