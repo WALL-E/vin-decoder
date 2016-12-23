@@ -205,10 +205,10 @@ agent_list = [
 "101.19.47.89:8118",
 ]
 
-def next_agent():
+def next_server():
     length =  len(agent_list)
     rand = random.randint(0, 100)
     return agent_list[rand%length]
 
 if __name__ == '__main__':
-    print next_agent()
+    print next_server()
