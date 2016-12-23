@@ -1,0 +1,27 @@
+<!doctype html>
+<html ng-app>
+    <head>
+        <link href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap-theme.css" rel="stylesheet">
+        <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.js"></script>
+        <script src="http://apps.bdimg.com/libs/angular.js/1.2.16/angular.js"></script>
+        <!--script src="static/js/angular.js"></script-->
+        <script src="static/js/app.js"></script>
+    </head>
+    <body>
+        <div ng-controller="vinSearchCtrl">
+            <b>vin search:</b>
+            <br>
+            <br>
+            <table>
+                <tr><td>Quantity</td><td>Cost</td></tr>
+                <tr>
+                    <td><input type="integer" min="0" ng-model="qty" required ></td>
+                    <td><input type="number" ng-model="cost" required ></td>
+                </tr>
+            </table>
+            <hr>
+            <b>Total:</b> {{qty * cost | currency}}
+        </div>
+    </body>
+</html>
