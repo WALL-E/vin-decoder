@@ -42,6 +42,7 @@ class DemoHandler(tornado.web.RequestHandler):
 
 class VinCodeHandler(tornado.web.RequestHandler):
     def get(self, vincode):
+        self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Content-Type", "application/json;charset=UTF-8")
         res = {
             "status": "20000000", 
