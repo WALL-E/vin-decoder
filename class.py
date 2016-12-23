@@ -10,6 +10,8 @@ class Vin:
     def checkVin(vincode):
         if len(vincode) != 17:
             return False
+        if "I" in vincode or "O" in vincode or "Q" in vincode:
+            return False
         return True
 
     def printVin(self):
