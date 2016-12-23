@@ -41,10 +41,29 @@ class MainHandler(tornado.web.RequestHandler):
           <li><a href="/">Home</a></li>
           <li><a href="/vin/v1/LVSHCAMB1CE054249">vinDemo</a></li>
           <li><a href="/wmi/v1/LVS">wmiDemo</a></li>
+          <li><a href="/vin/v1/checksum/LVSHCAMB1CE054249">vinChecksumDemo</a></li>
         </ul>
         """
         self.write(html)
 
+
+class VinChecksumHandler(tornado.web.RequestHandler):
+    def get(self, vincode):
+        vinobj = Vin(vincode)
+        if vinobj.isValid():
+            res = {
+                "status": "20000000", 
+                "message": "ok",
+                "checksum": True
+            }
+        else:
+            res = {
+                "status": "40000000", 
+                "message": "bad request",
+                "checksum": False
+            }
+        self.write(json.dumps(res, ensure_ascii=False))
+        
 
 class VinCodeHandler(tornado.web.RequestHandler):
     def get(self, vincode):
@@ -108,6 +127,7 @@ def  main():
         (r"/", MainHandler),
         (r"/vin/v1/(\w+)", VinCodeHandler),
         (r"/wmi/v1/(\w+)", WmiCodeHandler),
+        (r"/vin/v1/checksum/(\w+)", VinChecksumHandler),
     ], **settings)
 
     application.listen(options.port)
