@@ -6,24 +6,24 @@ AFA,Ford South Africa
 AHT,Toyota South Africa
 JA3,Mitsubishi
 JA4,Mitsubishi
-JA ,Isuzu
-JD ,Daihatsu
-JF ,Fuji Heavy Industries (Subaru)
-JH ,Honda
-JK ,Kawasaki (motorcycles)
+JA,Isuzu
+JD,Daihatsu
+JF,Fuji Heavy Industries (Subaru)
+JH,Honda
+JK,Kawasaki (motorcycles)
 JL5,Mitsubishi Fuso
 JMB,Mitsubishi Motors
 JMY,Mitsubishi Motors
 JMZ,Mazda
-JN ,Nissan
-JS ,Suzuki
-JT ,Toyota
-JY ,Yamaha (motorcycles)
-KL ,Daewoo General Motors South Korea
-KM ,Hyundai
+JN,Nissan
+JS,Suzuki
+JT,Toyota
+JY,Yamaha (motorcycles)
+KL,Daewoo General Motors South Korea
+KM,Hyundai
 KMY,Daelim (motorcycles)
 KM1,Hyosung (motorcycles)
-KN ,Kia
+KN,Kia
 KNM,Renault Samsung
 KPA,SsangYong
 KPT,SsangYong
@@ -392,11 +392,11 @@ Z8M,Marussia (Russia)
 4VM,Volvo
 4VZ,Volvo
 538,Zero Motorcycles (USA)
-5F ,Honda USA-Alabama
-5L ,Lincoln
+5F,Honda USA-Alabama
+5L,Lincoln
 5N1,Nissan USA
 5NP,Hyundai USA
-5T ,Toyota USA - trucks
+5T,Toyota USA - trucks
 5YJ,Tesla Motors
 6AB,MAN Australia
 6F4,Nissan Motor Company Australia
