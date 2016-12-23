@@ -1,6 +1,12 @@
 
 # mongodb doc
 
+## 数据库
+
+* vin
+* wmi
+
+## 常用命令
 *查看
   * show dbs
  
