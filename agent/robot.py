@@ -10,7 +10,7 @@ def agent_vin144_net(vinCode):
     post_url = "http://www.vin114.net/carpart/carmoduleinfo/vinresolve.jhtml"
     data_url = "http://www.vin114.net/visitor/carmoduleinfo/index.jhtml?levelIds=%s&vinDate=%s"
     timeout = 5
-    try_count = 3
+    try_count = 10
     html = None
     result = None
     headers_template = {
