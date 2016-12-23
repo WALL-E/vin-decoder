@@ -4,7 +4,7 @@
 
 class Vin:
     def __init__(self, vincode):
-        self.vincode = vincode
+        self.vincode = vincode.upper()
    
     def isValid(self):
         if len(self.vincode) != 17:
@@ -15,6 +15,9 @@ class Vin:
 
     def printVin(self):
         print "VIN: %s" % self.vincode
+
+    def getVin(self):
+        return self.vincode
 
     def getYear(self):
         return self.vincode[9]
@@ -39,4 +42,6 @@ if __name__ == '__main__':
     print "valid vin:", vin.isValid()
     vin = Vin("LVSHCAMB1CE0542490")
     print "valid vin:", vin.isValid()
+    vin = Vin("lvshcamb1ce0542490")
+    print "vin:", vin.getVin()
 
