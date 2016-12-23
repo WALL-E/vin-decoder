@@ -50,7 +50,7 @@ class MainHandler(tornado.web.RequestHandler):
 class VinChecksumHandler(tornado.web.RequestHandler):
     def get(self, vincode):
         vinobj = Vin(vincode)
-        if vinobj.isValid():
+        if vinobj.is_valid():
             res = {
                 "status": "20000000", 
                 "message": "ok",
@@ -70,20 +70,20 @@ class VinCodeHandler(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Content-Type", "application/json;charset=UTF-8")
         vinobj = Vin(vincode)
-        if not vinobj.isValid():
+        if not vinobj.is_valid():
             res = {
                 "status": "40000000", 
                 "message": "bad request",
             }
             self.write(json.dumps(res, ensure_ascii=False))
             return
-        result = Mongo().query_vin(vinobj.getWmi()+vinobj.getVds())
+        result = Mongo().query_vin(vinobj.get_wmi()+vinobj.get_vds())
         if result is None:
             res = {
                 "status": "40400000", 
                 "message": "not found",
             }
-            RabbitMQ().publish(vinObj.getVin())
+            RabbitMQ().publish(vinObj.get_vin())
             self.write(json.dumps(res, ensure_ascii=False))
         else:
             result.pop("_id")
