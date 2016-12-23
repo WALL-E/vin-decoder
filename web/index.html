@@ -1,28 +1,40 @@
 <!doctype html>
-<html ng-app>
-    <head>
-        <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
-	<script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="http://apps.bdimg.com/libs/angular.js/1.2.16/angular.js"></script>
-        <script src="static/js/app.js"></script>
-        <title>VinCode Search</title>
-    </head>
-    <body>
-        <div ng-controller="vinSearchCtrl">
-            <h1>vin search:</h1>
-            <br>
-            <br>
-            <form class="form-inline" role="form" ng-submit="search()">
- 	        <div class="form-group">
-		    <input type="text" class="form-control" id="name" ng-model="vinCode"
-			   maxlength="17" placeholder="VIN Code">
-	        </div>
-	        <button type="submit" class="btn btn-default">Search</button>
-            </form>
-            <hr>
-            <p><b>VinCode:</b> {{vinCode}}</p>
-            <b>Result:</b> {{result}} </p>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+  <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/angular.js/1.2.16/angular.js"></script>
+  <link rel="stylesheet" type="text/css" href="static/css/ng-prettyjson.min.css">
+  <script type="text/javascript" src="static/js/ng-prettyjson.min.js"></script>
+  <script src="static/js/app.js"></script>
+  <title>VinCode Decoder</title>
+</head>
+<body ng-app="mainApp">
+  <div class="container">
+    <div class="row">
+      <div class="span3">
+      </div>
+      <div class="span6">
+        <div ng-controller="vinSearchController">
+        <h1>vin decode:</h1>
+        <br>
+        <br>
+        <form class="form-inline" role="form" ng-submit="search()">
+          <div class="form-group">
+            <input type="text" class="form-control" id="name" ng-model="vinCode"
+                 maxlength="17" placeholder="VIN Code">
+          </div>
+          <button type="submit" class="btn btn-default">decode</button>
+        </form>
+        <hr>
+        <p><b>Result:</b></p>
+        <pre pretty-json="result"  />
         </div>
-    </body>
+      </div>
+      <div class="span3">
+      </div>
+    </div>
+  </div>
+</body>
 </html>
