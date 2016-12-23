@@ -2,6 +2,89 @@
 
 车架号(车辆识别码)查询服务/校验服务
 
+## vin layout
+The 17 character VIN:
+
+<table border="1">
+<tbody><tr><th colspan="4">VIN</th></tr>
+<tr id="txtbb">
+<td> Position</td>
+<td> ISO Section</td>
+<td> 49 CFR 565</td>
+<td> Assigned by</td>
+</tr>
+<tr><th colspan="4"></th></tr>
+<tr>
+<td id="txtbb"> 1 - 2</td>
+<td rowspan="2"> WMI</td>
+<td> Country Code</td>
+<td rowspan="2"> SAE</td>
+</tr>
+<tr>
+<td id="txtbb"> 2 - 3</td>
+<td> Manufacturer, Type of MV</td>
+</tr>
+<tr><th colspan="4"></th></tr>
+<tr>
+<td id="txtbb"> 4 - 8</td>
+<td> VDS</td>
+<td> Vehicle Attributes</td>
+<td> Manufacturer</td>
+</tr>
+<tr><th colspan="4"></th></tr>
+<tr>
+<td id="txtbb"> 9</td>
+<td rowspan="5"> VIS</td>
+<td> Check Digit</td>
+<td> Calculated</td>
+</tr>
+<tr><th></th>
+<th colspan="2"></th></tr>
+<tr>
+<td id="txtbb"> 10</td>
+<td> Model Year</td>
+<td> 30 Year Code</td>
+</tr>
+<tr>
+<td id="txtbb"> 11</td>
+<td> Manufacturing Plant</td>
+<td rowspan="2"> Manufacturer</td>
+</tr>
+<tr>
+<td id="txtbb"> 12 - 17</td>
+<td> Serial Number</td>
+</tr>
+<tr><th colspan="4"> Or &lt; 500 models per year</th></tr>
+<tr>
+<td id="txtbb"> 9</td>
+<td rowspan="6"> VIS</td>
+<td> Check Digit</td>
+<td> Calculated</td>
+</tr><tr><th></th>
+<th colspan="2"></th>
+</tr>
+<tr>
+<td id="txtbb"> 10</td>
+<td> Model Year</td>
+<td> 30 Year Code</td>
+</tr>
+<tr>
+<td id="txtbb"> 11</td>
+<td> Manufacturing Plant</td>
+<td> Manufacturer</td>
+</tr>
+<tr>
+<td id="txtbb"> 12 - 14</td>
+<td> WMI Suffix</td>
+<td> SAE</td>
+</tr>
+<tr>
+<td id="txtbb"> 15 - 17</td>
+<td> Serial Number</td>
+<td> Manufacturer</td>
+</tr>
+</tbody></table>
+
 
 ## 使用方法
 提供web查询服务
