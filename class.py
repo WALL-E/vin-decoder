@@ -3,29 +3,29 @@
 # -*- coding: UTF-8 -*-
 
 class Vin:
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, vincode):
+        self.vincode = vincode
    
-    @classmethod
-    def checkVin(cls, name):
-        if len(name) != 17:
+    @staticmethod
+    def checkVin(vincode):
+        if len(vincode) != 17:
             return False
         return True
 
     def printVin(self):
-        print "VIN: %s" % self.name
+        print "VIN: %s" % self.vincode
 
     def getYear(self):
-        return self.name[9]
+        return self.vincode[9]
      
     def getWmi(self):
-        return self.name[0:3]
+        return self.vincode[0:3]
 
     def getVds(self):
-        return self.name[3:8]
+        return self.vincode[3:8]
 
     def getChecksum(self):
-        return self.name[8]
+        return self.vincode[8]
 
 
 if __name__ == '__main__':
