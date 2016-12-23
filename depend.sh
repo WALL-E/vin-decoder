@@ -7,7 +7,10 @@ then
     exit 1
 fi
 
-yum install python-setuptools.noarch
+yum -y install python-setuptools.noarch
+yum -y install python-tornado.noarch
+yum -y install python-requests.noarch
+yum -y install supervisor.noarch
 
 command -v wget || yum -y install wget || exit 1
 
