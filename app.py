@@ -6,6 +6,12 @@ import os
 import logging
 import json
 
+ROOT_DIR = os.path.dirname(__file__)
+sys.path.append(ROOT_DIR)
+sys.path.append(os.path.join(ROOT_DIR, 'mongodb'))
+
+from mongo import Mongo
+from vin import Vin
 
 try:
     import tornado.ioloop
@@ -31,39 +37,61 @@ class MainHandler(tornado.web.RequestHandler):
         <br>
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/demo">Demo</a></li>
+          <li><a href="/vin/v1/LVSHCAMB1CE054249">vinDemo</a></li>
+          <li><a href="/wmi/v1/LVS">wmiDemo</a></li>
         </ul>
         """
         self.write(html)
 
-class DemoHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.redirect("/vin/v1/LVSHCAMB1CE054249")
 
 class VinCodeHandler(tornado.web.RequestHandler):
     def get(self, vincode):
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Content-Type", "application/json;charset=UTF-8")
-        res = {
-            "status": "20000000", 
-            "message": "ok",
-            "result": {
-                "vincode": vincode.encode("utf-8"),
-                "厂家": "一汽大众(奥迪)",
-                "品牌": "奥迪",
-                "车型": "Q5",
-                "VIN年份": "2013",
-                "排放标准": "国4",
-                "进气形式": "涡轮增压",
-                "排量(升)": "2.0 T",
-                "最大马力(ps)": "211",
-                "驱动形式": "前置四驱",
-                "变速器描述": "手自一体变速器(AMT)",
-                "档位数": "8",
-                "燃油类型": "汽油",
+        vinobj = Vin(vincode)
+        if not vinobj.isValid():
+            res = {
+                "status": "40000000", 
+                "message": "bad request",
             }
-        }
-        self.write(json.dumps(res, ensure_ascii=False))
+            self.write(json.dumps(res, ensure_ascii=False))
+            return
+        result = Mongo().query_vin(vinobj.getWmi()+vinobj.getVds())
+        if result is None:
+            res = {
+                "status": "40400000", 
+                "message": "not found",
+            }
+            self.write(json.dumps(res, ensure_ascii=False))
+        else:
+            result.pop("_id")
+            res = {
+                "status": "20000000", 
+                "message": "ok",
+                "result": result
+            }
+            self.write(json.dumps(res, ensure_ascii=False))
+
+
+class WmiCodeHandler(tornado.web.RequestHandler):
+    def get(self, wmicode):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Content-Type", "application/json;charset=UTF-8")
+        result = Mongo().query_wmi(wmicode)
+        if result is None:
+            res = {
+                "status": "40400000", 
+                "message": "not found",
+            }
+            self.write(json.dumps(res, ensure_ascii=False))
+        else:
+            result.pop("_id")
+            res = {
+                "status": "20000000", 
+                "message": "ok",
+                "result": result
+            }
+            self.write(json.dumps(res, ensure_ascii=False))
 
 
 def  main():
@@ -75,8 +103,8 @@ def  main():
 
     application = tornado.web.Application([
         (r"/", MainHandler),
-        (r"/demo", DemoHandler),
         (r"/vin/v1/(\w+)", VinCodeHandler),
+        (r"/wmi/v1/(\w+)", WmiCodeHandler),
     ], **settings)
 
     application.listen(options.port)
