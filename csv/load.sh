@@ -8,7 +8,7 @@ mongoimport -h 127.0.0.1:27017 \
 
 mongoimport -h 127.0.0.1:27017 \
 -d "vin" \
--c "wmi-from-offline" \
--f "WMI,Manufacturer" \
---type=csv --file=./wmi-from-offline.csv
+-c "wmi" \
+-f "wmi,manufacturer" \
+--type=csv --file=./wmi.csv
 
