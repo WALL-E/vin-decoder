@@ -1,27 +1,28 @@
 <!doctype html>
 <html ng-app>
     <head>
-        <link href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap-theme.css" rel="stylesheet">
-        <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.js"></script>
+        <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="http://apps.bdimg.com/libs/angular.js/1.2.16/angular.js"></script>
-        <!--script src="static/js/angular.js"></script-->
         <script src="static/js/app.js"></script>
+        <title>VinCode Search</title>
     </head>
     <body>
         <div ng-controller="vinSearchCtrl">
-            <b>vin search:</b>
+            <h1>vin search:</h1>
             <br>
             <br>
-            <table>
-                <tr><td>Quantity</td><td>Cost</td></tr>
-                <tr>
-                    <td><input type="integer" min="0" ng-model="qty" required ></td>
-                    <td><input type="number" ng-model="cost" required ></td>
-                </tr>
-            </table>
+            <form class="form-inline" role="form" ng-submit="search()">
+ 	        <div class="form-group">
+		    <input type="text" class="form-control" id="name" ng-model="vinCode"
+			   maxlength="17" placeholder="VIN Code">
+	        </div>
+	        <button type="submit" class="btn btn-default">Search</button>
+            </form>
             <hr>
-            <b>Total:</b> {{qty * cost | currency}}
+            <p><b>VinCode:</b> {{vinCode}}</p>
+            <b>Result:</b> {{result}} </p>
         </div>
     </body>
 </html>

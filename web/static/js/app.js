@@ -1,5 +1,8 @@
 
 function vinSearchCtrl($scope) {
-    $scope.qty = 1;
-    $scope.cost = 19.95;
+    $scope.vinCode = "";
+
+    $scope.search = function() {
+        $scope.result = "Ford";
+    }
 }
