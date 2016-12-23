@@ -1,15 +1,17 @@
 #!/usr/bin/python
 # coding:utf-8
 #
-# 从Html中解析数据
+# 从Html文件中解析数据
 #
 
 
+import sys
+import os
 from bs4 import BeautifulSoup
 import json
 
-def parse_vin114_net():
-    soup = BeautifulSoup(open('LVSHCAMB1CE054249.html'), "html.parser")
+def parse_html_vin114_net(html):
+    soup = BeautifulSoup(html, "html.parser")
 
     tables = soup.findAll('table')
     table = tables[0]
@@ -31,7 +33,16 @@ def parse_vin114_net():
 
 
 def main():
-    print parse_vin114_net()
+    if len(sys.argv) < 2:
+        print "./t.py filename.html"
+        sys.exit(1)
+
+    filename = sys.argv[1]
+    if not os.path.exists(filename):
+        print "%s is not exists" % (filename)
+        sys.exit(1)
+    html = open(filename)
+    print parse_html_vin114_net(html)
 
 
 if __name__ == "__main__":
