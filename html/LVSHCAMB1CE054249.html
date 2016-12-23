@@ -1,0 +1,259 @@
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>车系首页</title>
+
+
+
+<script type="text/javascript">
+	var basePath = "http://www.vin114.net:80/";
+	var projectBasePath = "http://www.vin114.net:80/";
+</script>
+
+
+<link rel="stylesheet" href="http://www.vin114.net:80/include/components/levelui/themes/metro/levelui.css" />
+<link rel="stylesheet" href="http://www.vin114.net:80/include/components/levelui/themes/icon.css" />
+<link rel="stylesheet" href="http://www.vin114.net:80/include/components/levelui/themes/color.css" />
+<link rel="stylesheet" href="http://www.vin114.net:80/include/css/member/cux.css" />
+
+<link rel="stylesheet" href="http://www.vin114.net:80/include/css/init.css" />
+<link rel="stylesheet" href="http://www.vin114.net:80/include/css/topnav.css" />
+<link rel="stylesheet" href="http://www.vin114.net:80/include/css/header.css" />
+<link rel="stylesheet" href="http://www.vin114.net:80/include/css/footer.css" />
+<link rel="stylesheet" href="http://www.vin114.net:80/include/css/adv.css" />
+
+
+
+
+
+ <script type="text/javascript" src="http://www.vin114.net:80/include/components/jquery.min.js"></script> 
+
+<script type="text/javascript" src="http://www.vin114.net:80/include/components/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="http://www.vin114.net:80/include/components/jquery.superslide.2.1.source.js"></script>
+<script type="text/javascript" src="http://www.vin114.net:80/include/components/layer/layer.js"></script>
+<script type="text/javascript" src="http://www.vin114.net:80/include/components/levelui/jquery.levelui.min.js"></script>
+<script type="text/javascript" src="http://www.vin114.net:80/include/components/levelui/locale/levelui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="http://www.vin114.net:80/include/js/common.js"></script>
+<script type="text/javascript" src="http://www.vin114.net:80/include/js/common/util.js?v=20161202"></script>
+
+
+
+<link rel="stylesheet" href="http://www.vin114.net:80/include/css/modelinfo.css" />
+
+</head>
+<body>
+	
+
+
+<div class="top">
+	<div class="top-container">
+		<ul class="tc-left">
+			<li class="first"><a href="http://www.vin114.net:80/" target="_blank" title="网站首页">网站首页</a></li>
+			<li><a href="http://www.vin114.net:80/include/html/followweixin.html" target="_blank" title="关注微信">关注微信</a></li>
+			<li><a href="http://www.vin114.net:80/include/html/clause.html" target="_blank" title="免责条款 ">免责条款 </a></li>
+		</ul>
+		
+
+		<ul class="tc-right">
+			<li class="tc-nologin"><a href="http://www.vin114.net:80/web/webmemberuser/login.jhtml">登录</a></li>
+			<li class="tc-nologin">|</li>
+			<li class="tc-nologin"><a href="http://www.vin114.net:80/web/webmember/joinus.jhtml">注册</a></li>
+			<li class="tc-nologin">|</li>
+			<li><a href="http://www.vin114.net:80/include/html/help.html" target="_blank">帮助中心</a></li>
+		</ul>
+		
+	</div>
+</div>
+
+	
+
+<div class="header">
+	<div class="header-container">
+		<div class="header-content clearfix">
+			<div class="header-logo">
+				<a href="" target="_blank"><img border="0" src="http://www.vin114.net:80/include/img/common/header_logo.png" title="力洋汽车信息识别网"></a>
+			</div>
+			<div class="header-nav">
+				<ul>
+					<li style="background-color: #e94740;"><a href="#" onclick="return false" class="selected">VIN码</a></li>
+					
+
+
+
+
+
+
+
+<script type="text/javascript">
+	$(function() {
+		$("#byj")
+				.click(
+						function() {
+							var pageSize = getPageSize();
+
+							//获取浏览器页面可见高度和宽度
+							//var _PageHeight = document.documentElement.clientHeight, _PageWidth = document.documentElement.clientWidth;
+
+							var _PageHeight = pageSize[3], _PageWidth = pageSize[2];
+
+							//计算loading框距离顶部和左部的距离（loading框的宽度为215px，高度为61px）
+							var _LoadingTop = _PageHeight > 61 ? (_PageHeight - 61) / 2
+									: 0, _LoadingLeft = _PageWidth > 215 ? (_PageWidth - 215) / 2
+									: 0;
+							//在页面未加载完毕之前显示的loading Html自定义内容
+							var _LoadingHtml = '<div id="loadingDiv" style="position:absolute;left:0;width:100%;height:'
+									+ _PageHeight
+									+ 'px;top:0;background:#f3f8ff;opacity:0.8;filter:alpha(opacity=80);z-index:10000;"><div style="position: absolute; cursor1: wait; left: '
+									+ _LoadingLeft
+									+ 'px; top:'
+									+ _LoadingTop
+									+ 'px; width: auto; height: 57px; line-height: 57px; padding-left: 50px; padding-right: 5px; background: #fff url(/Content/loading.gif) no-repeat scroll 5px 10px; border: 2px solid #95B8E7; color: #696969; font-family:\'Microsoft YaHei\';">页面加载中，请等待...</div></div>';
+							//呈现loading效果
+							//document.write(_LoadingHtml);
+							window.location.href = "maintain/maintainproduct/index.jhtml";
+						});
+	});
+</script>
+
+				</ul>
+			</div>
+			<div class="header-search">
+				<div class="header-soubg">
+					<div class="header-sinput">
+						<input type="text" class="header-stext" placeholder="请输入17位VIN码" id="searchvalue" name="searchvalue" autocomplete="off">
+					</div>
+				</div>
+				<div class="header-sbtn">
+					<input type="button" id="searchbutton" value="搜索" class="header-ssub">
+				</div>
+			</div>
+			<div class="header-wx">
+				<div>
+					<span>关注微信</span>
+				</div>
+				<div>
+					<a href="http://www.vin114.net:80/include/html/followweixin.html" target="_blank" title="关注微信"> <img src="http://www.vin114.net:80/include/img/common/header_wx.jpg" style="width: 64px;height: 64px;"></a>
+				</div>
+			</div>
+			<div class="header-qq">
+				<div>
+					<span>客服咨询</span>
+				</div>
+				<div>
+					<a href="tencent://message/?uin=2597584426&amp;Site=VIN114&amp;Menu=yes"> <img src="http://www.vin114.net:80/include/img/common/header_qq.jpg" style="width: 64px;height: 64px;"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<script type="text/javascript" src="http://www.vin114.net:80/include/js/adv/moduleinfo/topadv.js"></script>
+	<div class="wrap-nav1">
+		<a href="javascript:void(0)" class="brand-logo"> <img alt=" 丰田 花冠 自动 1.8 L " src="http://resource.vin114.net:6060/img/vehicle/brand/011.png" width="50" height="50">
+		</a> <span class="car-name"> 长安福特马自达 </span>
+	</div>
+	<div class="warp-nologin">
+		<a class="login" target="_self" href="http://www.vin114.net:80/web/webmemberuser/login.jhtml">登录</a> 后可查看更多配件信息。 <a class="register" href="http://www.vin114.net:80/web/webmember/joinus.jhtml">点击这里 免费注册</a>
+	</div>
+	<div class="wrap-nav2">
+		<ul>
+			<li class="first current"><a target="_self">车系首页</a></li>
+		</ul>
+	</div>
+	<div class="newbox">
+		<div class="mainhead">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" style="display:block">
+				
+				<tr>
+					<th class="fieldtitle">厂家</th>
+					<td class="fieldvalue">长安福特马自达</td>
+					<th class="fieldtitle">品牌</th>
+					<td class="fieldvalue">福特</td>
+					<th class="fieldtitle">车型</th>
+					<td class="fieldvalue">福克斯-两厢</td>
+				</tr>
+				<tr>
+					<th class="fieldtitle">VIN年份</th>
+					<td class="fieldvalue">2012</td>
+					<th class="fieldtitle">排放标准</th>
+					<td class="fieldvalue">国4</td>
+					<th class="fieldtitle">进气形式</th>
+					<td class="fieldvalue">自然吸气</td>
+				</tr>
+
+				<tr>
+
+
+					<th class="fieldtitle">排量(升)</th>
+					<td class="fieldvalue">
+											1.6&nbsp;L
+										 </td>
+					<th class="fieldtitle">最大马力(ps)</th>
+					<td class="fieldvalue">125</td>
+					<th class="fieldtitle">驱动形式</th>
+					<td class="fieldvalue">前置前驱</td>
+				</tr>
+
+				<tr>
+					<th class="fieldtitle">变速器描述</th>
+					<td class="fieldvalue">手动变速器(MT)</td>
+					<th class="fieldtitle">档位数</th>
+					<td class="fieldvalue">5</td>
+					<th class="fieldtitle">燃油类型</th>
+					<td class="fieldvalue">汽油</td>
+				</tr>
+
+			</table>
+		</div>
+		<div class="mainbottom">
+			<p>注：以上参数信息仅供参考，实际请以店内销售车辆为准，解释权归生产厂家所有。</p>
+		</div>
+	</div>
+	
+
+<div class="loading-window" style="display:none">
+	<div class="window-icon"></div>
+	<div class="window-content">正在拼了命为您搜索…</div>
+	<div style="clear:both;"></div>
+</div>
+<div class="footer">
+	<div class="footerul">
+		<ul class="mainbox">
+			<li style="width:1%">&nbsp;</li>
+			<li style="width:38%" class="li01">
+				<div class="clear15"></div> <span class="span1"><img src="http://www.vin114.net:80/include/img/common/footer_logo.png" alt="力洋汽车信息识别网" title="力洋汽车信息识别网"></span>
+				<div class="clear"></div> 国内最早用户最多的<strong>汽车VIN码识别网站</strong><br> 版权所有 © 上海力洋软件科技有限公司 2008-<script language="javascript">
+					var cur_d = new Date();
+					var myYears = (cur_d.getYear() < 1900) ? (1900 + cur_d
+							.getYear()) : cur_d.getYear();
+					document.write(myYears);
+				</script><br> 沪ICP证14022698号-1    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1258532352'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/stat.php%3Fid%3D1258532352%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            
+				<div class="clear"></div>
+			</li>
+			<li style="width:30%">
+				<div class="clear"></div> <span class="span1">注册咨询(8:30 - 17:00 节假日休息)</span>
+				<div>
+					<a title="点击在线咨询" href="tencent://message/?uin=2597584426&amp;Site=VIN114&amp;Menu=yes"> <font class="SiteQQ">2597584426</font>
+					</a><br> <font class="SiteTel">021-59165070</font>
+				</div>
+			</li>
+			<li style="width:30%">
+				<div class="clear"></div> <span class="span1">信息反馈 (8:30 - 17:00 节假日休息)</span>
+				<div>
+					<font class="SiteTel">021-69588091-809 </font><br> <font class="SiteTel">021-69588091-819 </font><br>
+				</div>
+			</li>
+			<div class="clearfix"></div>
+		</ul>
+	</div>
+</div>
+
+
+</body>
+
+</html>
