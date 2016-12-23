@@ -6,11 +6,10 @@ class Vin:
     def __init__(self, vincode):
         self.vincode = vincode
    
-    @staticmethod
-    def checkVin(vincode):
-        if len(vincode) != 17:
+    def isValid(self):
+        if len(self.vincode) != 17:
             return False
-        if "I" in vincode or "O" in vincode or "Q" in vincode:
+        if "I" in self.vincode or "O" in self.vincode or "Q" in self.vincode:
             return False
         return True
 
@@ -37,6 +36,7 @@ if __name__ == '__main__':
     print "wmi:", vin.getWmi()
     print "vds:", vin.getVds()
     print "checksum:", vin.getChecksum()
-    print "valid vin:", Vin.checkVin("LVSHCAMB1CE054249")
-    print "valid vin:", Vin.checkVin("LVSHCAMB1CE0542490")
+    print "valid vin:", vin.isValid()
+    vin = Vin("LVSHCAMB1CE0542490")
+    print "valid vin:", vin.isValid()
 
