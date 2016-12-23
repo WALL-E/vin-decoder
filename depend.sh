@@ -27,4 +27,5 @@ command -v wget || yum -y install wget || exit 1
 easy_install pip
 pip install pymongo
 pip install beautifulsoup4
+pip install pika
 
