@@ -9,9 +9,11 @@ import json
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
 sys.path.append(os.path.join(ROOT_DIR, 'mongodb'))
+sys.path.append(os.path.join(ROOT_DIR, 'rabbitmq'))
 
 from mongo import Mongo
 from vin import Vin
+from rabbitmq import RabbitMQ
 
 try:
     import tornado.ioloop
@@ -62,6 +64,7 @@ class VinCodeHandler(tornado.web.RequestHandler):
                 "status": "40400000", 
                 "message": "not found",
             }
+            RabbitMQ().publish(vincode)
             self.write(json.dumps(res, ensure_ascii=False))
         else:
             result.pop("_id")
