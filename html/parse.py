@@ -11,10 +11,20 @@ from bs4 import BeautifulSoup
 import json
 
 def parse_html_vin114_net(html):
+    """
+    parse html of vin114.net
+
+    :param html: html strings
+    :returns: dict or None
+    """
     soup = BeautifulSoup(html, "html.parser")
 
     tables = soup.findAll('table')
-    table = tables[0]
+    try:
+        table = tables[0]
+    except IndexError, msg:
+        print msg
+        return None
 
     result_list = []
     for row in table.findAll('tr'):
@@ -29,12 +39,12 @@ def parse_html_vin114_net(html):
         v = result_list[i+1]
         result_dict[k] = v
 
-    return json.dumps(result_dict, encoding='UTF-8', ensure_ascii=False)
+    return result_dict
 
 
 def main():
     if len(sys.argv) < 2:
-        print "./t.py filename.html"
+        print "%s filename.html" % (sys.argv[0])
         sys.exit(1)
 
     filename = sys.argv[1]
@@ -42,7 +52,8 @@ def main():
         print "%s is not exists" % (filename)
         sys.exit(1)
     html = open(filename)
-    print parse_html_vin114_net(html)
+    data = parse_html_vin114_net(html)
+    print json.dumps(data, encoding='UTF-8', ensure_ascii=False)
 
 
 if __name__ == "__main__":
