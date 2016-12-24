@@ -32,10 +32,14 @@ def do_task(vin_code):
     html = agent_vin144_net(vin_code)
     if html is not None:
         result = parse_html_vin114_net(html)  
-        data = json.loads(result)
-        data["vinCode"] = vin_code[0:8]
-        print data
-        collection.insert(data)
+        if result is not None:
+            result["vinCode"] = vin_code[0:8]
+            print result
+            collection.insert(result)
+        else:
+            print "[1]%s not found" % (vin_code)
+    else:
+        print "[2]%s not found" % (vin_code)
 
 
 def main():
@@ -44,8 +48,8 @@ def main():
         do_task(vin_code)
         sys.exit(1)
     
+    mq = RabbitMQ(queue="vin")
     while True:
-        mq = RabbitMQ(queue="vin")
         msg = mq.basic_get()
         if msg:
             print msg
