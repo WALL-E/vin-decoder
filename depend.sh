@@ -28,4 +28,5 @@ easy_install pip
 pip install pymongo
 pip install beautifulsoup4
 pip install pika
+pip install ipy
 
