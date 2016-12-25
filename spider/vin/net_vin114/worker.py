@@ -19,19 +19,24 @@ from mongo import Mongo
 from robot import robot_html
 from parse import parse_html
 
-timeout = 60
 
 def do_task(vin_code):
+    """
+    Execute query VIN task
+
+    :vin_code: The 17 character VIN
+    :returns: list or None
+    """
     print "do_task(): %s" % (vin_code)
     html = robot_html(vin_code)
     if html is not None:
-        result = parse_html(html)  
-        if result is not None:
-            return result
+        results = parse_html(html)  
+        if results:
+            return results
         else:
             print "[1] %s not found, parse html failed" % (vin_code)
     else:
-        print "[2]%s not found, download page failed" % (vin_code)
+        print "[2] %s not found, download page failed" % (vin_code)
     return None
 
 

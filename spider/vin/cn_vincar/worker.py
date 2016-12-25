@@ -33,9 +33,12 @@ def do_task(vin_code):
     html = robot_html(vin_code)
     if html is not None:
         results = parse_html(html)  
-        return results
+        if results:
+            return result
+        else:
+            print "[1] %s not found, parse html failed" % (vin_code)
     else:
-        print "%s not found, download page failed" % (vin_code)
+        print "[2] %s not found, download page failed" % (vin_code)
     return None
 
 
