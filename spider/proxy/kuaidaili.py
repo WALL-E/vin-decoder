@@ -12,19 +12,11 @@ from bs4 import BeautifulSoup
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
 sys.path.append(os.path.join(ROOT_DIR, '../../rabbitmq'))
+sys.path.append(os.path.join(ROOT_DIR, '../../utils'))
 
 from rabbitmq import RabbitMQ
+from downloader import get_page
 
-timeout = 5
-headers_default = {
-    "Pragma": "no-cache",
-    "Accept-Encoding": "gzip, deflate",
-    "Accept-Language": "zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4",
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    "Cache-Control": "no-cache",
-    "Connection": "keep-alive",
-}
 
 def parse_html(html):
     soup = BeautifulSoup(html, "html.parser")
@@ -51,16 +43,12 @@ def parse_html(html):
         mq.publish(content)
 
 
-def get_page(url):
-    response = requests.get(url, headers=headers_default, timeout=timeout)
-    return response.text
-
 def main():
     pages = 3
     home_url =  ["http://www.kuaidaili.com/free/intr/%s/"%(i) for i in range(1, pages)]
     while True:
         for url in home_url:
-            html = get_page(url)
+            html = get_page(url, proxy_use=False)
             parse_html(html)
         time.sleep(300)
 
