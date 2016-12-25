@@ -7,12 +7,12 @@ import requests
 
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
-sys.path.append(os.path.join(ROOT_DIR, 'proxy'))
+sys.path.append(os.path.join(ROOT_DIR, '../../../proxy'))
 
 import proxy
 
 
-def robot_html_vin144_net(vinCode):
+def robot_html(vinCode):
     home_url = "http://www.vin114.net/"
     post_url = "http://www.vin114.net/carpart/carmoduleinfo/vinresolve.jhtml"
     data_url = "http://www.vin114.net/visitor/carmoduleinfo/index.jhtml?levelIds=%s&vinDate=%s"
@@ -61,7 +61,7 @@ def robot_html_vin144_net(vinCode):
             break
 
     if response_1 is None:
-        print "No agents available"
+        print "[1]No agents available or Timeout"
         return html
 
     # 2-Request
@@ -88,6 +88,7 @@ def robot_html_vin144_net(vinCode):
             break
 
     if response_2 is None or url is None:
+        print "[2]No agents available or Timeout"
         return html
 
     # 3-Request
@@ -109,4 +110,4 @@ def robot_html_vin144_net(vinCode):
 
 
 if __name__ == '__main__':
-    print robot_html_vin144_net("LVSHCAMB1CE054249")
+    print robot_html("LVSHCAMB1CE054249")

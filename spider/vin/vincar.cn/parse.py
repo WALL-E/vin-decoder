@@ -15,7 +15,7 @@ def to_json(obj):
     return json.dumps(obj, encoding='UTF-8', ensure_ascii=False)
 
 
-def parse_html_vin114_net(html):
+def parse_html(html):
     """
     parse html of vin114.net
 
@@ -51,7 +51,7 @@ def main():
         print "%s is not exists" % (filename)
         sys.exit(1)
     html = open(filename)
-    data = parse_html_vin114_net(html)
+    data = parse_html(html)
     if data is None:
         print "result:", data
     else:

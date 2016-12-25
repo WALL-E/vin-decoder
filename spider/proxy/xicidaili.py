@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
-sys.path.append(os.path.join(ROOT_DIR, '../rabbitmq'))
+sys.path.append(os.path.join(ROOT_DIR, '../../rabbitmq'))
 
 from rabbitmq import RabbitMQ
 
@@ -27,14 +27,14 @@ headers_default = {
 
 def parse_html(html):
     soup = BeautifulSoup(html, "html.parser")
-    tables = soup.findAll('table')
-    table = tables[2]
-    mq = RabbitMQ(queue="66ip")
-    for tr in table.findAll('tr')[1:]:
+    tables = soup.findAll('table', id="ip_list")
+    table = tables[0]
+    mq = RabbitMQ(queue="xicidaili")
+    for tr in table.findAll('tr'):
         tds = tr.findAll('td')
         if len(tds) > 0:
-            ip = tds[0].string
-            port = tds[1].string
+            ip = tds[1].string
+            port = tds[2].string
             content = "%s:%s" %(ip, port)
             print content
             try:
@@ -53,7 +53,8 @@ def get_page(url):
 
 
 def main():
-    home_url = "http://www.66ip.cn/areaindex_1/1.html"
+    pages = 3
+    home_url = "http://www.xicidaili.com/"
     html = get_page(home_url)
     parse_html(html)
 
