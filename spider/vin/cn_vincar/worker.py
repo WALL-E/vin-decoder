@@ -48,13 +48,14 @@ def do_once(vin_code):
 
 def do_loop():
     mq = RabbitMQ(queue="vin")
+    db = Mongo()
     while True:
         vin_code = mq.basic_get()
         if vin_code:
             print "vinCode: %s" % (vin_code)
             results = do_task(vin_code)
             if results:
-                Mongo().insert_vin(results, vin_code)
+                db.insert_vin(results, vin_code)
             else:
                 # Requeue
                 mq.publish(vin_code)
