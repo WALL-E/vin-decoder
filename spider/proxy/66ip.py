@@ -6,6 +6,7 @@ import sys
 import os
 import requests
 import ipaddress
+import time
 from bs4 import BeautifulSoup
 
 ROOT_DIR = os.path.dirname(__file__)
@@ -54,8 +55,10 @@ def get_page(url):
 
 def main():
     home_url = "http://www.66ip.cn/areaindex_1/1.html"
-    html = get_page(home_url)
-    parse_html(html)
+    while True:
+        html = get_page(home_url)
+        parse_html(html)
+        time.sleep(300)
 
 if __name__ == '__main__':
     main()

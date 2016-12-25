@@ -4,6 +4,7 @@
 
 import sys
 import os
+import time
 import requests
 import ipaddress
 from bs4 import BeautifulSoup
@@ -54,8 +55,11 @@ def get_page(url):
 
 def main():
     home_url = "http://31f.cn/http-proxy/"
-    html = get_page(home_url)
-    parse_html(html)
+
+    while True:
+        html = get_page(home_url)
+        parse_html(html)
+        time.sleep(300)
 
 if __name__ == '__main__':
     main()

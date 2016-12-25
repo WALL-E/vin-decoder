@@ -4,6 +4,7 @@
 
 import sys
 import os
+import time
 import requests
 import ipaddress
 from bs4 import BeautifulSoup
@@ -57,9 +58,11 @@ def get_page(url):
 def main():
     pages = 3
     home_url =  ["http://www.kuaidaili.com/free/intr/%s/"%(i) for i in range(1, pages)]
-    for url in home_url:
-        html = get_page(url)
-        parse_html(html)
+    while True:
+        for url in home_url:
+            html = get_page(url)
+            parse_html(html)
+        time.sleep(300)
 
 if __name__ == '__main__':
     main()
