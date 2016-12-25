@@ -77,8 +77,8 @@ class VinCodeHandler(tornado.web.RequestHandler):
             }
             self.write(json.dumps(res, ensure_ascii=False))
             return
-        result = Mongo().query_vin(vinobj.get_wmi()+vinobj.get_vds())
-        if result is None:
+        results = Mongo().query_vin(vinobj.get_wmi()+vinobj.get_vds())
+        if results.count() == 0:
             res = {
                 "status": "40400000", 
                 "message": "not found",
@@ -86,11 +86,14 @@ class VinCodeHandler(tornado.web.RequestHandler):
             RabbitMQ().publish(vinobj.get_vin())
             self.write(json.dumps(res, ensure_ascii=False))
         else:
-            result.pop("_id")
+            lists = []
+            for result in results:
+                result.pop("_id")
+                lists.append(result)
             res = {
                 "status": "20000000", 
                 "message": "ok",
-                "result": result
+                "result": lists
             }
             self.write(json.dumps(res, ensure_ascii=False))
 
