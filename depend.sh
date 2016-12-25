@@ -25,6 +25,8 @@ yum -y install supervisor.noarch
 
 command -v wget || yum -y install wget || exit 1
 command -v curl || yum -y install curl || exit 1
+command -v netstat || yum -y install net-tools || exit 1
+command -v lsof || yum -y install lsof || exit 1
 
 easy_install pip
 pip install pymongo
