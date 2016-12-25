@@ -16,8 +16,8 @@ def robot_html(vinCode):
     home_url = "http://www.vin114.net/"
     post_url = "http://www.vin114.net/carpart/carmoduleinfo/vinresolve.jhtml"
     data_url = "http://www.vin114.net/visitor/carmoduleinfo/index.jhtml?levelIds=%s&vinDate=%s"
-    timeout = 5
-    try_count = 5
+    timeout = 10
+    try_count = 10
     html = None
     result = None
     headers_template = {
@@ -71,7 +71,7 @@ def robot_html(vinCode):
     payload = {'vinCode': vinCode}
     response_2 = None
     url = None
-    for i in range(try_count):
+    for i in range(1):
         try:
             response_2 = requests.post(post_url, proxies=proxies, timeout=timeout, data=payload, cookies=cookies, headers=headers_template)
         except requests.exceptions.ConnectTimeout, msg:
@@ -99,7 +99,7 @@ def robot_html(vinCode):
 
     # 3-Request
     response_3 = None
-    for i in range(try_count):
+    for i in range(1):
         try:
             response_3 = requests.get(url, proxies=proxies, timeout=timeout)
         except requests.exceptions.ConnectTimeout, msg:

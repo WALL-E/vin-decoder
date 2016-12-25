@@ -11,13 +11,11 @@ from pymongo import *
 
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
-sys.path.append(os.path.join(ROOT_DIR, '../rabbitmq'))
-sys.path.append(os.path.join(ROOT_DIR, '../agent'))
-sys.path.append(os.path.join(ROOT_DIR, '../html'))
+sys.path.append(os.path.join(ROOT_DIR, '../../../rabbitmq'))
 
 from rabbitmq import RabbitMQ
-from robot import robot_html_vin144_net
-from parse import parse_html_vin114_net
+from robot import robot_html
+from parse import parse_html
 
 timeout = 60
 
@@ -29,9 +27,9 @@ collection = db["vin"]
 
 def do_task(vin_code):
     print "do_task(): %s" % (vin_code)
-    html = robot_html_vin144_net(vin_code)
+    html = robot_html(vin_code)
     if html is not None:
-        result = parse_html_vin114_net(html)  
+        result = parse_html(html)  
         if result is not None:
             result["vinCode"] = vin_code[0:8]
             return result
