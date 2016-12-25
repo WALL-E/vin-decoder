@@ -78,6 +78,7 @@ def main():
         do_once(vin_code)
     else:
         do_loop()
-    
+
+
 if __name__ == '__main__':
     main()

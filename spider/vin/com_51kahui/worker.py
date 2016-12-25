@@ -56,20 +56,21 @@ def do_once(vin_code):
     results = do_task(vin_code)
     if results:
         Mongo().insert_vin(results, vin_code)
-    print results
+    print "result: %s" % (results)
 
 
 def do_loop():
     mq = RabbitMQ(queue="vin")
     db = Mongo()
     while True:
-        msg = mq.basic_get()
-        if msg:
-            vin_code = msg
+        vin_code = mq.basic_get()
+        if vin_code:
+            print "vinCode: %s" % (vin_code)
             results = do_task(vin_code)
             if results:
                 db.insert_vin(results, vin_code)
             else:
+                # Requeue
                 mq.publish(vin_code)
             print "final result: %s" % (results)
         else:
@@ -87,6 +88,7 @@ def main():
         do_once(vin_code)
     else:
         do_loop()
+
 
 if __name__ == '__main__':
     main()
