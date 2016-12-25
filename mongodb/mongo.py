@@ -14,22 +14,24 @@ class Mongo():
         client = MongoClient(self.host, self.port)
         db = client["vin"]
         collection = db["vin"]
-        result = collection.find_one({"vinCode":vin_code})
-        return result
+        results = collection.find({"vinCode":vin_code})
+        return results
 
     def query_wmi(self, wmi_code):
         client = MongoClient() 
         client = MongoClient(self.host, self.port)
         db = client["vin"]
         collection = db["wmi"]
-        result = collection.find_one({"wmiCode":wmi_code})
-        return result
+        results = collection.find({"wmiCode":wmi_code})
+        return results
 
 
 if __name__ == '__main__':
     mongo = Mongo()
-    result = mongo.query_wmi("LSG")
-    print type(result), result
-    result = mongo.query_vin("LSVAM4187C2184847")
-    print type(result), result
+    results = mongo.query_vin("LSVAM418")
+    for result in results:
+        print "vin:", type(result), result
+    results = mongo.query_wmi("LFV")
+    for result in results:
+        print "wmi:", type(result), result
 
