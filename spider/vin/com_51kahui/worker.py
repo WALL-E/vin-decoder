@@ -75,7 +75,7 @@ def do_loop():
         else:
             print "no topic, to sleep 10 sec ..."
             time.sleep(10)
-        #time.sleep(300)
+        time.sleep(300)
 
 
 def main():

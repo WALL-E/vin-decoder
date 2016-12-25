@@ -61,6 +61,9 @@ def do_loop():
         time.sleep(5)
 
 def main():
+    """
+    main function
+    """
     if len(sys.argv) == 2:
         vin_code = sys.argv[1]
         do_once(vin_code)
