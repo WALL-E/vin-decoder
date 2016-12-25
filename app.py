@@ -15,9 +15,24 @@ from vin import Vin
 from rabbitmq import RabbitMQ
 
 from spider.vin.com_51kahui import worker as com_51kahui_worker
+from spider.vin.net_vin114 import worker as net_vin114_worker
+from spider.vin.cn_vincar import worker as cn_vincar_worker
 
 
-WORKERS = [com_51kahui_worker,]
+WORKERS = [
+    {
+        "module": com_51kahui_worker,
+        "enable": False
+    },
+    {
+        "module": net_vin114_worker,
+        "enable": False
+    },
+    {
+        "module": cn_vincar_worker,
+        "enable": True
+    },
+]
 
 try:
     import tornado.ioloop
@@ -90,8 +105,9 @@ class VinCodeHandler(tornado.web.RequestHandler):
             }
             RabbitMQ().publish(vinobj.get_vin())
             if is_realtime:
-                for _,worker in enumerate(WORKERS):
-                    data = worker.do_task(vinobj.get_vin())
+                workers = [worker for worker in WORKERS if worker["enable"]]
+                for worker in workers:
+                    data = worker["module"].do_task(vinobj.get_vin())
                     if data:
                         res = {
                             "status": "20000000",
