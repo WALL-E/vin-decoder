@@ -17,7 +17,7 @@ def robot_html(vinCode):
     post_url = "http://www.vin114.net/carpart/carmoduleinfo/vinresolve.jhtml"
     data_url = "http://www.vin114.net/visitor/carmoduleinfo/index.jhtml?levelIds=%s&vinDate=%s"
     timeout = 5
-    try_count = 10
+    try_count = 5
     html = None
     result = None
     headers_template = {
@@ -48,11 +48,14 @@ def robot_html(vinCode):
         }
         try:
             response_1 = requests.get(home_url, proxies=proxies, timeout=timeout)
-        except requests.exceptions.ConnectTimeout:
+        except requests.exceptions.ConnectTimeout, msg:
+            print msg
             continue
-        except requests.exceptions.ReadTimeout:
+        except requests.exceptions.ReadTimeout, msg:
+            print msg
             continue
-        except requests.exceptions.ConnectionError:
+        except requests.exceptions.ConnectionError, msg:
+            print msg
             continue
 
         print "[1]", response_1
@@ -71,11 +74,14 @@ def robot_html(vinCode):
     for i in range(try_count):
         try:
             response_2 = requests.post(post_url, proxies=proxies, timeout=timeout, data=payload, cookies=cookies, headers=headers_template)
-        except requests.exceptions.ConnectTimeout:
+        except requests.exceptions.ConnectTimeout, msg:
+            print msg
             continue
-        except requests.exceptions.ReadTimeout:
+        except requests.exceptions.ReadTimeout, msg:
+            print msg
             continue
-        except requests.exceptions.ConnectionError:
+        except requests.exceptions.ConnectionError, msg:
+            print msg
             continue
 
         print "[2]", response_2
@@ -96,11 +102,14 @@ def robot_html(vinCode):
     for i in range(try_count):
         try:
             response_3 = requests.get(url, proxies=proxies, timeout=timeout)
-        except requests.exceptions.ConnectTimeout:
+        except requests.exceptions.ConnectTimeout, msg:
+            print msg
             continue
-        except requests.exceptions.ReadTimeout:
+        except requests.exceptions.ReadTimeout, msg:
+            print msg
             continue
-        except requests.exceptions.ConnectionError:
+        except requests.exceptions.ConnectionError, msg:
+            print msg
             continue
 
     if response_3 is not None:
