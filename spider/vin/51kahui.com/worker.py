@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 """
-pymongo wrapper
+worker: query vin
 """
 
 import sys
