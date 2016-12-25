@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+"""
+pymongo wrapper
+"""
 
-import requests
 import sys
 import json
 import os
 import time
 
-from pymongo import *
+import requests
 
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
@@ -17,8 +19,8 @@ sys.path.append(os.path.join(ROOT_DIR, '../../../mongodb'))
 from rabbitmq import RabbitMQ
 from mongo import Mongo
 
-base_url = "http://spider.51kahui.com/CarInfo/vinQuery"
-timeout = 60
+URL = "http://spider.51kahui.com/CarInfo/vinQuery"
+TIMEOUT = 60
 
 
 def do_task(vin_code):
@@ -33,7 +35,7 @@ def do_task(vin_code):
     response = None
     data = None
     try:
-        response = requests.post(base_url, timeout=timeout, data=payload)
+        response = requests.post(URL, timeout=TIMEOUT, data=payload)
     except Exception, msg:
         print "Exception: ", msg
 
@@ -51,6 +53,9 @@ def do_task(vin_code):
 
 
 def main():
+    """
+    main function
+    """
     db = Mongo()
     if len(sys.argv) == 2:
         vin_code = sys.argv[1]
@@ -58,7 +63,7 @@ def main():
         if data:
             db.insert_vin(data, vin_code)
         sys.exit(1)
-    
+
     while True:
         mq = RabbitMQ(queue="vin")
         msg = mq.basic_get()
