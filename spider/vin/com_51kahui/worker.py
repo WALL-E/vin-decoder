@@ -52,33 +52,41 @@ def do_task(vin_code):
     return data
 
 
-def main():
-    """
-    main function
-    """
-    db = Mongo()
-    if len(sys.argv) == 2:
-        vin_code = sys.argv[1]
-        data = do_task(vin_code)
-        if data:
-            db.insert_vin(data, vin_code)
-        sys.exit(1)
+def do_once(vin_code):
+    results = do_task(vin_code)
+    if results:
+        Mongo().insert_vin(results, vin_code)
+    print results
 
+
+def do_loop():
+    mq = RabbitMQ(queue="vin")
+    db = Mongo()
     while True:
-        mq = RabbitMQ(queue="vin")
         msg = mq.basic_get()
         if msg:
-            print msg
             vin_code = msg
-            data = do_task(vin_code)
-            if data:
-                db.insert_vin(data, vin_code)
+            results = do_task(vin_code)
+            print results
+            if results:
+                db.insert_vin(results, vin_code)
             else:
                 mq.publish(vin_code)
         else:
             print "no topic, to sleep 10 sec ..."
             time.sleep(10)
-        time.sleep(300)
+        #time.sleep(300)
+
+
+def main():
+    """
+    main function
+    """
+    if len(sys.argv) == 2:
+        vin_code = sys.argv[1]
+        do_once(vin_code)
+    else:
+        do_loop()
 
 if __name__ == '__main__':
     main()

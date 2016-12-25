@@ -44,13 +44,13 @@ def insert_db(obj, vin_code):
     obj["vinLong"] = vin_code
     collection.insert(obj)
 
-def peek_task(vin_code):
+def do_once(vin_code):
     result = do_task(vin_code)
     if result:
         insert_db(result, vin_code)
     print "result: %s" % (result)
 
-def loop_task():
+def do_loop():
     mq = RabbitMQ(queue="vin")
     while True:
         vin_code = mq.basic_get()
@@ -71,9 +71,9 @@ def loop_task():
 def main():
     if len(sys.argv) == 2:
         vin_code = sys.argv[1]
-        peek_task(vin_code)
+        do_once(vin_code)
     else:
-        loop_task()
+        do_loop()
     
 if __name__ == '__main__':
     main()
