@@ -105,7 +105,7 @@ def robot_html(vin_code, proxy_use=True, proxy_reuse=False):
             print msg
             continue
 
-        print "[2]", response.text
+        print "[2]", response
         if response.status_code == 200:
             html = response.text
             break
