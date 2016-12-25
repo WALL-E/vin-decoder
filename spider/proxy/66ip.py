@@ -4,7 +4,6 @@
 
 import sys
 import os
-import requests
 import ipaddress
 import time
 from bs4 import BeautifulSoup

@@ -5,7 +5,6 @@
 import sys
 import os
 import time
-import requests
 import ipaddress
 from bs4 import BeautifulSoup
 
