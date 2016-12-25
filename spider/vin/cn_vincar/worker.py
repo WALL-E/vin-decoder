@@ -34,7 +34,7 @@ def do_task(vin_code):
     if html is not None:
         results = parse_html(html)  
         if results:
-            return result
+            return results
         else:
             print "[1] %s not found, parse html failed" % (vin_code)
     else:
