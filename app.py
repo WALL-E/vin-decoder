@@ -15,6 +15,11 @@ from mongo import Mongo
 from vin import Vin
 from rabbitmq import RabbitMQ
 
+from spider.vin.com_51kahui import worker as com_51kahui_worker
+
+
+WORKERS = [com_51kahui_worker,]
+
 try:
     import tornado.ioloop
     import tornado.web
@@ -69,6 +74,7 @@ class VinCodeHandler(tornado.web.RequestHandler):
     def get(self, vincode):
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Content-Type", "application/json;charset=UTF-8")
+        is_realtime = self.get_argument('is_realtime', False)
         vinobj = Vin(vincode)
         if not vinobj.is_valid():
             res = {
@@ -84,6 +90,16 @@ class VinCodeHandler(tornado.web.RequestHandler):
                 "message": "not found",
             }
             RabbitMQ().publish(vinobj.get_vin())
+            if is_realtime:
+                for i in range(len(WORKERS)):
+                    data = WORKERS[i].do_task(vinobj.get_vin())
+                    if data:
+                        res = {
+                            "status": "20000000",
+                            "message": "ok",
+                            "result": data
+                        }
+                        break
             self.write(json.dumps(res, ensure_ascii=False))
         else:
             lists = []
