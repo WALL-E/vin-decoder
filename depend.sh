@@ -34,3 +34,4 @@ pip install beautifulsoup4
 pip install pika
 pip install ipy
 pip install ipaddress
+pip install pylint
