@@ -1,8 +1,15 @@
 #!/usr/bin/python
 
-import requests
-import proxy
+import sys
+import os
 import json
+import requests
+
+ROOT_DIR = os.path.dirname(__file__)
+sys.path.append(ROOT_DIR)
+sys.path.append(os.path.join(ROOT_DIR, 'proxy'))
+
+import proxy
 
 
 def robot_html_vin144_net(vinCode):

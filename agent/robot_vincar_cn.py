@@ -1,9 +1,16 @@
 #!/usr/bin/python
 
+import sys
+import os
 import requests
-import proxy
 import json
 from bs4 import BeautifulSoup
+
+ROOT_DIR = os.path.dirname(__file__)
+sys.path.append(ROOT_DIR)
+sys.path.append(os.path.join(ROOT_DIR, 'proxy'))
+
+import proxy
 
 
 def robot_html_vincar_cn(vinCode):
