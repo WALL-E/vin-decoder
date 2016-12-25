@@ -17,7 +17,7 @@
       <div class="span6">
         <div ng-controller="vinSearchController">
         <h1>vin decoder:</h1>
-        Http Endpoint: <a target="_blank" ng-href="{{baseUrl}}/{{vinCode}}">{{baseUrl}}/{{vinCode}}</a>
+        Http Endpoint: <a target="_blank" ng-href="{{baseUrl}}/{{vinCode}}?is_realtime=1">{{baseUrl}}/{{vinCode}}?is_realtime=1</a>
         <br>
         <br>
         <form class="form-inline" role="form" ng-submit="search(vinCode)">
