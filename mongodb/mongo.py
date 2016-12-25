@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 from pymongo import *
-import json
 
 
 class Mongo():
