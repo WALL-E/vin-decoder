@@ -18,9 +18,8 @@ sys.path.append(os.path.join(ROOT_DIR, '../../../mongodb'))
 
 from rabbitmq import RabbitMQ
 from mongo import Mongo
-
-URL = "http://spider.51kahui.com/CarInfo/vinQuery"
-TIMEOUT = 60
+from robot import robot_html
+from parse import parse_html
 
 
 def do_task(vin_code):
@@ -30,26 +29,17 @@ def do_task(vin_code):
     :vin_code: The 17 character VIN
     :returns: list or None
     """
-    print "do_task(): %s" %(vin_code)
-    payload = {"vinCode": vin_code}
-    response = None
-    data = None
-    try:
-        response = requests.post(URL, timeout=TIMEOUT, data=payload)
-    except Exception, msg:
-        print "Exception: ", msg
-
-    if response is not None and response.status_code == 200:
-        data = json.loads(response.text)
-        # print data
-        if data["status"] == "20000000":
-            result = data["result"]
-            data = [result]
+    print "do_task(): %s" % (vin_code)
+    html = robot_html(vin_code)
+    if html is not None:
+        results = parse_html(html)  
+        if results:
+            return results
         else:
-            print "[1] %s not found, access restricted" % (vin_code)
+            print "[1] %s not found, parse html failed" % (vin_code)
     else:
-        print "[2] %s not found, network fault" % (vin_code)
-    return data
+        print "[2] %s not found, download page failed" % (vin_code)
+    return None
 
 
 def do_once(vin_code):
