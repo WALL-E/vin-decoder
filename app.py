@@ -22,11 +22,11 @@ from spider.vin.cn_vincar import worker as cn_vincar_worker
 WORKERS = [
     {
         "module": com_51kahui_worker,
-        "enable": False
+        "enable": True
     },
     {
         "module": net_vin114_worker,
-        "enable": False
+        "enable": True
     },
     {
         "module": cn_vincar_worker,
