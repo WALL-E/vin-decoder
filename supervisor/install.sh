@@ -7,12 +7,12 @@ then
     exit 1
 fi
 
-/bin/cp -f tornado.ini /etc/supervisord.d
+/bin/cp -f vin.ini /etc/supervisord.d
 
 ret=$?
 if test $role -eq 0
 then
-    echo "copy tornado.ini to /etc/supervisord.d [ok]"
+    echo "copy vin.ini to /etc/supervisord.d [ok]"
 else
-    echo "copy tornado.ini to /etc/supervisord.d [failed]"
+    echo "copy vin.ini to /etc/supervisord.d [failed]"
 fi
