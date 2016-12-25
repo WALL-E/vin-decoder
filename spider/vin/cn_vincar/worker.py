@@ -62,7 +62,7 @@ def do_loop():
             else:
                 # Requeue
                 mq.publish(vin_code)
-            print "result: %s" % (results)
+            print "final result: %s" % (results)
         else:
             print "no topic, to sleep 10 sec ..."
             time.sleep(10)

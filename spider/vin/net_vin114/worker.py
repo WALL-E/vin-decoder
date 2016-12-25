@@ -1,13 +1,15 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+"""
+worker: query vin
+"""
 
-import requests
 import sys
 import json
 import os
 import time
 
-from pymongo import *
+import requests
 
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
@@ -46,6 +48,7 @@ def do_once(vin_code):
         Mongo().insert_vin(results, vin_code)
     print "result: %s" % (results)
 
+
 def do_loop():
     mq = RabbitMQ(queue="vin")
     db = Mongo()
@@ -54,16 +57,17 @@ def do_loop():
         if vin_code:
             print "vinCode: %s" % (vin_code)
             results = do_task(vin_code)
-            if results is None:
+            if results:
+                db.insert_vin(results, vin_code)
+            else:
                 # Requeue
                 mq.publish(vin_code)
-            else:
-                db.insert_vin(results, vin_code)
             print "final result: %s" % (results)
         else:
             print "no topic, to sleep 10 sec ..."
             time.sleep(10)
         time.sleep(5)
+
 
 def main():
     """
