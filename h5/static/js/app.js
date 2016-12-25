@@ -8,7 +8,7 @@ mainApp.controller("vinSearchController", function($scope, $http) {
     $scope.search = function(vinCode) {
         $scope.vinCode = vinCode;
         $http({
-            url: baseUrl + vinCode,
+            url: $scope.baseUrl + "/" + vinCode,
             method:'GET',
             params:{
                 'is_realtime':'true'
