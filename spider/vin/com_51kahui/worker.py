@@ -67,11 +67,11 @@ def do_loop():
         if msg:
             vin_code = msg
             results = do_task(vin_code)
-            print results
             if results:
                 db.insert_vin(results, vin_code)
             else:
                 mq.publish(vin_code)
+            print "final result: %s" % (results)
         else:
             print "no topic, to sleep 10 sec ..."
             time.sleep(10)
