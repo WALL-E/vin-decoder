@@ -162,7 +162,7 @@ curl http://127.0.0.1/vin/v1/LVSHCAMB1CE054249
 
 mongodb实现了无模式，非常适合存储网络爬取到的数据，rabbitmq降低了多个模块的耦合性。
 
-![image](vin-decoder.jpg)
+![image](screenshot/vin-decoder.jpg)
 
 ## RabbitMQ
 系统包含了多个队列，这里做一个统一说明
@@ -190,4 +190,4 @@ mongodb实现了无模式，非常适合存储网络爬取到的数据，rabbitm
 ## 简单的H5查询页面
 这里涉及到一个跨域问题，在Tornado里做了忽略处理。
 
-![image](vin-decoder-h5.png)
+![image](screenshot/vin-decoder-h5.png)
