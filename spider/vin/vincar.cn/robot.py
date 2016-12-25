@@ -8,12 +8,12 @@ from bs4 import BeautifulSoup
 
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
-sys.path.append(os.path.join(ROOT_DIR, 'proxy'))
+sys.path.append(os.path.join(ROOT_DIR, '../../../proxy'))
 
 import proxy
 
 
-def robot_html_vincar_cn(vinCode):
+def robot_html(vinCode):
     home_url = "https://vincar.cn/"
     post_url = "https://vincar.cn/vin"
     timeout = 5
@@ -91,4 +91,4 @@ def robot_html_vincar_cn(vinCode):
 
 
 if __name__ == '__main__':
-    print robot_html_vincar_cn("LVSHCAMB1CE054249")
+    print robot_html("LVSHCAMB1CE054249")
