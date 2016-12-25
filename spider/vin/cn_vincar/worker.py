@@ -30,7 +30,7 @@ def do_task(vin_code):
     :returns: list or None
     """
     print "do_task(): %s" % (vin_code)
-    html = robot_html(vin_code)
+    html = robot_html(vin_code, proxy_use=True, proxy_reuse=False)
     if html is not None:
         results = parse_html(html)  
         if results:
