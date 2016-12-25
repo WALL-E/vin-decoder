@@ -9,7 +9,10 @@ mainApp.controller("vinSearchController", function($scope, $http) {
         $scope.vinCode = vinCode;
         $http({
             url: baseUrl + vinCode,
-            method:'GET'
+            method:'GET',
+            params:{
+                'is_realtime':'true'
+            }
         }).success(function(data,header,config,status){
             $scope.result = data;
         }).error(function(data,header,config,status){
