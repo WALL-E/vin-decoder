@@ -69,7 +69,7 @@ def main():
     main function
     """
     home_url = "http://api.ffan.com/"
-    html = get_page(home_url, proxy_use=True, proxy_reuse=False)
+    html = get_page(home_url, proxy_use=True, proxy_reuse=True)
     print html
 
 if __name__ == '__main__':
