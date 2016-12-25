@@ -41,8 +41,8 @@ def do_task(vin_code):
 
 
 def peek_task(vin_code):
-    data = do_task(vin_code)
-    print "result: %s" % (data)
+    result = do_task(vin_code)
+    print "result: %s" % (result)
 
 def loop_task():
     mq = RabbitMQ(queue="vin")
@@ -50,13 +50,13 @@ def loop_task():
         vin_code = mq.basic_get()
         if vin_code:
             print "vinCode: %s" % (vin_code)
-            data = do_task(vin_code)
-            if data is None:
+            result = do_task(vin_code)
+            if result is None:
                 # Requeue
                 mq.publish(vin_code)
             else:
-                collection.insert(data)
-            print "result: %s" % (data)
+                collection.insert(result)
+            print "result: %s" % (result)
         else:
             print "no topic, to sleep 10 sec ..."
             time.sleep(10)
