@@ -3,7 +3,6 @@
 
 import sys
 import os
-import logging
 import json
 
 ROOT_DIR = os.path.dirname(__file__)
@@ -57,18 +56,18 @@ class VinChecksumHandler(tornado.web.RequestHandler):
         vinobj = Vin(vincode)
         if vinobj.is_valid():
             res = {
-                "status": "20000000", 
+                "status": "20000000",
                 "message": "ok",
                 "checksum": True
             }
         else:
             res = {
-                "status": "40000000", 
+                "status": "40000000",
                 "message": "bad request",
                 "checksum": False
             }
         self.write(json.dumps(res, ensure_ascii=False))
-        
+
 
 class VinCodeHandler(tornado.web.RequestHandler):
     def get(self, vincode):
@@ -78,7 +77,7 @@ class VinCodeHandler(tornado.web.RequestHandler):
         vinobj = Vin(vincode)
         if not vinobj.is_valid():
             res = {
-                "status": "40000000", 
+                "status": "40000000",
                 "message": "bad request",
             }
             self.write(json.dumps(res, ensure_ascii=False))
@@ -86,13 +85,13 @@ class VinCodeHandler(tornado.web.RequestHandler):
         results = Mongo().query_vin(vinobj.get_wmi()+vinobj.get_vds())
         if results.count() == 0:
             res = {
-                "status": "40400000", 
+                "status": "40400000",
                 "message": "not found",
             }
             RabbitMQ().publish(vinobj.get_vin())
             if is_realtime:
-                for i in range(len(WORKERS)):
-                    data = WORKERS[i].do_task(vinobj.get_vin())
+                for _,worker in enumerate(WORKERS):
+                    data = worker.do_task(vinobj.get_vin())
                     if data:
                         res = {
                             "status": "20000000",
@@ -107,7 +106,7 @@ class VinCodeHandler(tornado.web.RequestHandler):
                 result.pop("_id")
                 lists.append(result)
             res = {
-                "status": "20000000", 
+                "status": "20000000",
                 "message": "ok",
                 "result": lists
             }
@@ -121,14 +120,14 @@ class WmiCodeHandler(tornado.web.RequestHandler):
         result = Mongo().query_wmi(wmicode)
         if result is None:
             res = {
-                "status": "40400000", 
+                "status": "40400000",
                 "message": "not found",
             }
             self.write(json.dumps(res, ensure_ascii=False))
         else:
             result.pop("_id")
             res = {
-                "status": "20000000", 
+                "status": "20000000",
                 "message": "ok",
                 "result": result
             }
@@ -155,4 +154,3 @@ def  main():
 
 if __name__ == "__main__":
     main()
-
