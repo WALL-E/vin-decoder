@@ -28,6 +28,17 @@ class RabbitMQ():
         print(' [*] Waiting for messages. To exit press CTRL+C')
         channel.start_consuming()
 
+    def basic_get(self):
+        credentials = pika.PlainCredentials('guest', 'guest')
+        connection = pika.BlockingConnection(
+            pika.ConnectionParameters(self.host, self.port, '/', credentials))
+        channel = connection.channel()
+        msg = channel.basic_get(queue=self.queue)
+        if msg[0] is not None:
+            channel.basic_ack(msg[0].delivery_tag)
+            return msg[2]
+        return None
+
 
 def callback(ch, method, properties, body):
     print(" [x] Received %r" % body)
