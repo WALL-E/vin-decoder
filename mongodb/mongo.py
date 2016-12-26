@@ -14,7 +14,7 @@ class Mongo():
         client = MongoClient(self.host, self.port)
         db = client["vin"]
         collection = db["vin"]
-        result = collection.find_one({"vincode":vin_code})
+        result = collection.find_one({"vinCode":vin_code})
         return result
 
     def query_wmi(self, wmi_code):
@@ -22,7 +22,7 @@ class Mongo():
         client = MongoClient(self.host, self.port)
         db = client["vin"]
         collection = db["wmi"]
-        result = collection.find_one({"wmicode":wmi_code})
+        result = collection.find_one({"wmiCode":wmi_code})
         return result
 
 
