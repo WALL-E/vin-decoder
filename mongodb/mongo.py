@@ -1,34 +1,50 @@
 #!/usr/bin/python
+"""
+mongo python module
+"""
 
-from pymongo import *
+import pymongo
 
 
-class Mongo():
+class Mongo(object):
+    """
+    Mongo Class
+    """
     def __init__(self, host="localhost", port=27017, dbname="vin"):
         self.host = host
         self.port = port
-        self.conn = MongoClient(self.host, self.port)
-        self.db = self.conn[dbname]
+        self.conn = pymongo.MongoClient(self.host, self.port)
+        self.database = self.conn[dbname]
 
     def query_vin(self, vin_code):
-        collection = self.db["vin"]
-        results = collection.find({"vinCode":vin_code})
-        return results
+        """
+        query vin collection
+        """
+        collection = self.database["vin"]
+        return collection.find({"vinCode":vin_code})
 
     def query_wmi(self, wmi_code):
-        collection = self.db["wmi"]
-        results = collection.find({"wmiCode":wmi_code})
-        return results
+        """
+        query wmi collection
+        """
+        collection = self.database["wmi"]
+        return collection.find({"wmiCode":wmi_code})
 
     def insert_vin(self, objs, vin_code):
-        collection = self.db["vin"]
+        """
+        insert vin collection, vinCode and vinLong
+        """
+        collection = self.database["vin"]
         for obj in objs:
             obj["vinCode"] = vin_code[0:8]
             obj["vinLong"] = vin_code
             collection.insert(obj)
 
 
-if __name__ == '__main__':
+def main():
+    """
+    main function
+    """
     mongo = Mongo()
     results = mongo.query_vin("LSVAM418")
     for result in results:
@@ -37,3 +53,6 @@ if __name__ == '__main__':
     for result in results:
         print "wmi:", type(result), result
 
+
+if __name__ == '__main__':
+    main()
