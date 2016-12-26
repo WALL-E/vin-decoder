@@ -83,7 +83,7 @@ class VinCodeHandler(tornado.web.RequestHandler):
                 "status": "40400000", 
                 "message": "not found",
             }
-            RabbitMQ().publish(vinObj.get_vin())
+            RabbitMQ().publish(vinobj.get_vin())
             self.write(json.dumps(res, ensure_ascii=False))
         else:
             result.pop("_id")
