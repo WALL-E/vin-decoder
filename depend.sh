@@ -15,6 +15,7 @@ gpgcheck=0
 enabled=1
 EOF
 
+yum install -y supervisor.noarch
 yum install -y mongodb-org
 yum install -y rabbitmq-server
 yum -y install python-setuptools.noarch
