@@ -17,16 +17,24 @@
       </div>
       <div class="span6">
         <div ng-controller="vinSearchController">
-        <h1>vin decode:</h1>
+        <h1>vin decoder:</h1>
         <br>
         <br>
-        <form class="form-inline" role="form" ng-submit="search()">
+        <form class="form-inline" role="form" ng-submit="search(vinCode)">
           <div class="form-group">
-            <input type="text" class="form-control" id="name" ng-model="vinCode"
+            <input type="text" class="form-control" size=21 id="name" ng-model="vinCode"
                  maxlength="17" placeholder="VIN Code">
           </div>
           <button type="submit" class="btn btn-default">decode</button>
         </form>
+        <hr style="margin-bottom: 5px;">
+        <button type="button" class="btn btn-default btn-sm" ng-click="search('SAJAA2081F8V83984')">SAJAA2081F8V83984</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="search('LGJE5FE05FM373942')">LGJE5FE05FM373942</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="search('LBELMBKB5EY495362')">LBELMBKB5EY495362</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="search('LEFCJDBB1FTP03289')">LEFCJDBB1FTP03289</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="search('LFMBEK4B5B0044061')">LFMBEK4B5B0044061</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="search('LN86GCBF3GB044042')">LN86GCBF3GB044042</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="search('LSVXJ45L0G2019181')">LSVXJ45L0G2019181</button>
         <hr>
         <p><b>Result:</b></p>
         <pre pretty-json="result" />
