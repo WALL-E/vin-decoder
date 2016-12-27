@@ -13,7 +13,7 @@ http://localhost:15672/
 ## 常用命令
 
 * 启动
-  * rabbitmq-server –detached
+  * rabbitmq-server -detached
   * rabbitmqctl start\_app
 
 * 关闭
