@@ -90,6 +90,8 @@ def agent_vin144_net(vinCode):
         html = response.text
     except UnboundLocalError:
         pass
+    except AttributeError:
+        pass
 
     return html
 
