@@ -7,7 +7,6 @@
   <script src="static/js/angular.js"></script>
   <link rel="stylesheet" type="text/css" href="static/css/ng-prettyjson.min.css">
   <script type="text/javascript" src="static/js/ng-prettyjson.min.js"></script>
-  <script src="static/js/app.js"></script>
   <title>VinCode Decoder</title>
 </head>
 <body ng-app="mainApp">
@@ -18,6 +17,7 @@
       <div class="span6">
         <div ng-controller="vinSearchController">
         <h1>vin decoder:</h1>
+        Http Endpoint: <a target="_blank" ng-href="http://172.28.32.101:10090/vin/v1/{{vinCode}}">http://172.28.32.102:10090/vin/v1/{{vinCode}}</a>
         <br>
         <br>
         <form class="form-inline" role="form" ng-submit="search(vinCode)">
@@ -44,5 +44,8 @@
       </div>
     </div>
   </div>
+<script>
+    document.write("<s"+"cript type='text/javascript' src='static/js/app.js?"+Math.random()+"'></s"+"cript>");
+</script>
 </body>
 </html>
