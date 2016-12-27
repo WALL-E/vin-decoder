@@ -1,0 +1,5 @@
+
+0 * * * * /apps/vin-decoder/spider/xicidaili.py
+0 * * * * /apps/vin-decoder/spider/31f.py
+0 * * * * /apps/vin-decoder/spider/66ip.py
+0 * * * * /apps/vin-decoder/spider/kuaidaili.py
