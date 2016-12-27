@@ -58,7 +58,7 @@ def main():
         else:
             print "no topic, to sleep 10 sec ..."
             time.sleep(10)
-        time.sleep(30)
+        time.sleep(60)
 
 if __name__ == '__main__':
     main()
