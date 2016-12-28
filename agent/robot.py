@@ -31,8 +31,13 @@ def robot_html_vin144_net(vinCode):
     response_1 = None
     cookies = None
     for i in range(try_count):
+        server = proxy.next_server()
+        if server is None:
+              print "No agents available"
+              time.sleep(60)
+              continue
         proxies = {
-            "http": "http://%s"%(proxy.next_server())
+            "http": "http://%s" % (server)
         }
         try:
             response_1 = requests.get(home_url, proxies=proxies, timeout=timeout)
