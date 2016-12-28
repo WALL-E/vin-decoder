@@ -34,7 +34,6 @@ def do_task(vin_code):
         result = parse_html_vin114_net(html)  
         if result is not None:
             result["vinCode"] = vin_code[0:8]
-            collection.insert(result)
             return result
         else:
             print "[1] %s not found, parse html failed" % (vin_code)
@@ -43,26 +42,34 @@ def do_task(vin_code):
     return None
 
 
-def main():
-    if len(sys.argv) == 2:
-        vin_code = sys.argv[1]
-        data = do_task(vin_code)
-        # print "result: %s" % (data)
-        print "result: %s" % (json.dumps(data, ensure_ascii=False))
-        sys.exit(1)
-    
+def peek_task(vin_code):
+    data = do_task(vin_code)
+    print "result: %s" % (data)
+
+def loop_task():
     mq = RabbitMQ(queue="vin")
     while True:
-        msg = mq.basic_get()
-        if msg:
-            print "vinCode: %s" % (msg)
-            vin_code = msg
+        vin_code = mq.basic_get()
+        if vin_code:
+            print "vinCode: %s" % (vin_code)
             data = do_task(vin_code)
+            if data is None:
+                # Requeue
+                mq.publish(vin_code)
+            else:
+                collection.insert(data)
             print "result: %s" % (data)
         else:
             print "no topic, to sleep 10 sec ..."
             time.sleep(10)
         time.sleep(5)
 
+def main():
+    if len(sys.argv) == 2:
+        vin_code = sys.argv[1]
+        peek_task(vin_code)
+    else:
+        loop_task()
+    
 if __name__ == '__main__':
     main()
