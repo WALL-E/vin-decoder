@@ -17,29 +17,28 @@ def parse_html_vin114_net(html):
     :param html: html strings
     :returns: dict or None
     """
-    soup = BeautifulSoup(html, "html.parser")
-
-    tables = soup.findAll('table')
     try:
+        soup = BeautifulSoup(html, "html.parser")
+        tables = soup.findAll('table')
         table = tables[0]
-    except IndexError, msg:
-        print msg
+
+        result_list = []
+        for row in table.findAll('tr'):
+            for child in row.children:
+                ret = child.string.strip()
+                if len(ret) > 0:
+                    result_list.append(ret.encode("utf8"))
+
+        result_dict = {}
+        for i in range(0, len(result_list), 2):
+            k = result_list[i]
+            v = result_list[i+1]
+            result_dict[k] = v
+
+        return result_dict
+    except Exception, msg:
+        print "error: [parse html] %s" % (msg)
         return None
-
-    result_list = []
-    for row in table.findAll('tr'):
-        for child in row.children:
-            ret = child.string.strip()
-            if len(ret) > 0:
-                result_list.append(ret.encode("utf8"))
-
-    result_dict = {}
-    for i in range(0, len(result_list), 2):
-        k = result_list[i]
-        v = result_list[i+1]
-        result_dict[k] = v
-
-    return result_dict
 
 
 def main():
@@ -53,7 +52,10 @@ def main():
         sys.exit(1)
     html = open(filename)
     data = parse_html_vin114_net(html)
-    print json.dumps(data, encoding='UTF-8', ensure_ascii=False)
+    if data is None:
+        print "result:", data
+    else:
+        print "result:", json.dumps(data, encoding='UTF-8', ensure_ascii=False)
 
 
 if __name__ == "__main__":
