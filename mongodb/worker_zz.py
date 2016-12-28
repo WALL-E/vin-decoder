@@ -16,7 +16,7 @@ sys.path.append(os.path.join(ROOT_DIR, '../agent'))
 sys.path.append(os.path.join(ROOT_DIR, '../html'))
 
 from rabbitmq import RabbitMQ
-from robot import agent_vin144_net
+from robot import robot_html_vin144_net
 from parse import parse_html_vin114_net
 
 timeout = 60
@@ -28,37 +28,41 @@ collection = db["vin"]
 
 
 def do_task(vin_code):
-    print "do_task(): %s" %(vin_code)
-    html = agent_vin144_net(vin_code)
+    print "do_task(): %s" % (vin_code)
+    html = robot_html_vin144_net(vin_code)
     if html is not None:
         result = parse_html_vin114_net(html)  
         if result is not None:
             result["vinCode"] = vin_code[0:8]
-            print result
             collection.insert(result)
+            return result
         else:
-            print "[1]%s not found" % (vin_code)
+            print "[1] %s not found, parse html failed" % (vin_code)
     else:
-        print "[2]%s not found" % (vin_code)
+        print "[2] %s not found, download page failed" % (vin_code)
+    return None
 
 
 def main():
     if len(sys.argv) == 2:
         vin_code = sys.argv[1]
-        do_task(vin_code)
+        data = do_task(vin_code)
+        # print "result: %s" % (data)
+        print "result: %s" % (json.dumps(data, ensure_ascii=False))
         sys.exit(1)
     
     mq = RabbitMQ(queue="vin")
     while True:
         msg = mq.basic_get()
         if msg:
-            print msg
+            print "vinCode: %s" % (msg)
             vin_code = msg
-            do_task(vin_code)
+            data = do_task(vin_code)
+            print "result: %s" % (data)
         else:
             print "no topic, to sleep 10 sec ..."
             time.sleep(10)
-        time.sleep(30)
+        time.sleep(5)
 
 if __name__ == '__main__':
     main()
