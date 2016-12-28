@@ -10,7 +10,7 @@ def robot_html_vin144_net(vinCode):
     post_url = "http://www.vin114.net/carpart/carmoduleinfo/vinresolve.jhtml"
     data_url = "http://www.vin114.net/visitor/carmoduleinfo/index.jhtml?levelIds=%s&vinDate=%s"
     timeout = 5
-    try_count = 5
+    try_count = 10
     html = None
     result = None
     headers_template = {
@@ -29,6 +29,7 @@ def robot_html_vin144_net(vinCode):
 
     # 1-Request
     response_1 = None
+    cookies = None
     for i in range(try_count):
         proxies = {
             "http": "http://%s"%(proxy.next_server())
@@ -44,10 +45,11 @@ def robot_html_vin144_net(vinCode):
 
         print "[1]", response_1
         if response_1 is not None and response_1.status_code == 200:
-            cookies =  response_1.cookies
+            cookies = response_1.cookies
             break
 
     if response_1 is None:
+        print "No agents available"
         return html
 
     # 2-Request
@@ -68,8 +70,8 @@ def robot_html_vin144_net(vinCode):
         if response_2.status_code == 200:
             result = response_2.text
             result = json.loads(result)
-            print "[2] result:", result
-            if result["code"].startswith("S"):
+            print "[2] result:", json.dumps(result, encoding='UTF-8', ensure_ascii=False)
+            if result["code"].startswith("S") and result["code"] != "S0":
                 url = data_url % (result["message"]["levelIds"], result["message"]["vinDate"])
             break
 
