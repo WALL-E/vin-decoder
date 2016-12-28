@@ -5,12 +5,12 @@ import proxy
 import json
 
 
-def agent_vin144_net(vinCode):
+def robot_html_vin144_net(vinCode):
     home_url = "http://www.vin114.net/"
     post_url = "http://www.vin114.net/carpart/carmoduleinfo/vinresolve.jhtml"
     data_url = "http://www.vin114.net/visitor/carmoduleinfo/index.jhtml?levelIds=%s&vinDate=%s"
     timeout = 5
-    try_count = 10
+    try_count = 5
     html = None
     result = None
     headers_template = {
@@ -27,14 +27,14 @@ def agent_vin144_net(vinCode):
         "Referer": "http://www.vin114.net/",
     }
 
-
+    # 1-Request
+    response_1 = None
     for i in range(try_count):
         proxies = {
             "http": "http://%s"%(proxy.next_server())
         }
         try:
-            response = None
-            response = requests.get(home_url, proxies=proxies, timeout=timeout)
+            response_1 = requests.get(home_url, proxies=proxies, timeout=timeout)
         except requests.exceptions.ConnectTimeout:
             continue
         except requests.exceptions.ReadTimeout:
@@ -42,22 +42,21 @@ def agent_vin144_net(vinCode):
         except requests.exceptions.ConnectionError:
             continue
 
-        print "[1]", response
-        if response.status_code == 200:
+        print "[1]", response_1
+        if response_1 is not None and response_1.status_code == 200:
+            cookies =  response_1.cookies
             break
 
-    try:
-        cookies =  response.cookies
-    except UnboundLocalError:
-        return html
-    except AttributeError:
+    if response_1 is None:
         return html
 
+    # 2-Request
     payload = {'vinCode': vinCode}
+    response_2 = None
+    url = None
     for i in range(try_count):
         try:
-            response = None
-            response = requests.post(post_url, proxies=proxies, timeout=timeout, data=payload, cookies=cookies, headers=headers_template)
+            response_2 = requests.post(post_url, proxies=proxies, timeout=timeout, data=payload, cookies=cookies, headers=headers_template)
         except requests.exceptions.ConnectTimeout:
             continue
         except requests.exceptions.ReadTimeout:
@@ -65,36 +64,35 @@ def agent_vin144_net(vinCode):
         except requests.exceptions.ConnectionError:
             continue
 
-        print "[2]", response
-        if response.status_code == 200:
-            result = response.text
+        print "[2]", response_2
+        if response_2.status_code == 200:
+            result = response_2.text
+            result = json.loads(result)
+            print "[2] result:", result
+            if result["code"].startswith("S"):
+                url = data_url % (result["message"]["levelIds"], result["message"]["vinDate"])
             break
 
-    if result is not None:
-        result = json.loads(result)
-        print "result:", result
-        if result["code"].startswith("S"):
-            url = data_url % (result["message"]["levelIds"], result["message"]["vinDate"])
+    if response_2 is None or url is None:
+        return html
 
-            for i in range(try_count):
-                try:
-                    response = None
-                    response = requests.get(url, proxies=proxies, timeout=timeout)
-                except requests.exceptions.ConnectTimeout:
-                    continue
-                except requests.exceptions.ReadTimeout:
-                    continue
-                except requests.exceptions.ConnectionError:
-                    continue
-    try:
-        html = response.text
-    except UnboundLocalError:
-        pass
-    except AttributeError:
-        pass
+    # 3-Request
+    response_3 = None
+    for i in range(try_count):
+        try:
+            response_3 = requests.get(url, proxies=proxies, timeout=timeout)
+        except requests.exceptions.ConnectTimeout:
+            continue
+        except requests.exceptions.ReadTimeout:
+            continue
+        except requests.exceptions.ConnectionError:
+            continue
+
+    if response_3 is not None:
+        html = response_3.text
 
     return html
 
 
 if __name__ == '__main__':
-    print agent_vin144_net("LVSHCAMB1CE054249")
+    print robot_html_vin144_net("LVSHCAMB1CE054249")
