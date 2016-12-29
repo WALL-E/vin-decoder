@@ -39,8 +39,15 @@ def do_task(vin_code):
     return None
 
 
+def insert_db(obj, vin_code):
+    obj["vinCode"] = vin_code[0:8]
+    obj["vinLong"] = vin_code
+    collection.insert(obj)
+
 def peek_task(vin_code):
     result = do_task(vin_code)
+    if result:
+        insert_db(result, vin_code)
     print "result: %s" % (result)
 
 def loop_task():
@@ -54,9 +61,7 @@ def loop_task():
                 # Requeue
                 mq.publish(vin_code)
             else:
-                result["vinCode"] = vin_code[0:8]
-                result["vinLong"] = vin_code
-                collection.insert(result)
+                insert_db(result, vin_code)
             print "result: %s" % (result)
         else:
             print "no topic, to sleep 10 sec ..."

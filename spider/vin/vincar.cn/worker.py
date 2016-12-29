@@ -43,10 +43,10 @@ def insert_db(objs, vin_code):
         collection.insert(obj)
 
 def peek_task(vin_code):
-    data = do_task(vin_code)
-    if data:
-        insert_db(data, vin_code)
-    print "result: %s" % (data)
+    objs = do_task(vin_code)
+    if objs:
+        insert_db(objs, vin_code)
+    print "result: %s" % (objs)
 
 def loop_task():
     mq = RabbitMQ(queue="vin")
@@ -55,8 +55,9 @@ def loop_task():
         if vin_code:
             print "vinCode: %s" % (vin_code)
             results = do_task(vin_code)
-            insert_db(result, vin_code)
-            if len(result) == 0:
+            if results:
+                insert_db(results, vin_code)
+            else:
                 # Requeue
                 mq.publish(vin_code)
             print "result: %s" % (results)
