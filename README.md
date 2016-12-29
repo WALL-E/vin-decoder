@@ -160,3 +160,25 @@ curl http://127.0.0.1/vin/v1/LVSHCAMB1CE054249
 mongodb实现了无模式，非常适合存储网络爬取到的数据，rabbitmq降低了多个模块的耦合性。
 
 ![image](vin-decoder.jpg)
+
+## RabbitMQ
+系统包含了多个队列，这里做一个统一说明
+
+* vin
+  * 需要查询的vin code
+* pre-proxy
+  * 爬虫获取到的代理服务器
+* proxy
+  ** 经过简单验证的代理服务器
+
+## Spider
+包含了两种爬虫
+
+* 代理网站
+  * http://31f.cn/
+  * http://www.kuaidaili.com/
+  * http://www.66ip.cn/
+
+* vin查询网站
+  * [www.vin114.net](http://www.vin114.net)
+  * [www.vincar.cn](http://www.vincar.cn)
