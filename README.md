@@ -148,5 +148,15 @@ curl http://127.0.0.1/vin/v1/LVSHCAMB1CE054249
 
 * 付费查询
   * 网页解析
-* 网络海搜
+* 网络爬虫
   * 定时更新 
+
+## 系统架构
+系统以来主要依赖两个组件
+
+* mongodb
+* rabbitmq
+
+mongodb实现了无模式，非常适合存储网络爬取到的数据，rabbitmq降低了多个模块的耦合性。
+
+(vin-decoder.jpg)
