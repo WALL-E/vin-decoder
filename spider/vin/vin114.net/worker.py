@@ -31,7 +31,6 @@ def do_task(vin_code):
     if html is not None:
         result = parse_html(html)  
         if result is not None:
-            result["vinCode"] = vin_code[0:8]
             return result
         else:
             print "[1] %s not found, parse html failed" % (vin_code)
@@ -55,6 +54,8 @@ def loop_task():
                 # Requeue
                 mq.publish(vin_code)
             else:
+                result["vinCode"] = vin_code[0:8]
+                result["vinLong"] = vin_code
                 collection.insert(result)
             print "result: %s" % (result)
         else:
