@@ -36,8 +36,16 @@ def do_task(vin_code):
     return None
 
 
+def insert_db(objs, vin_code):
+    for obj in objs:
+        obj["vinCode"] = vin_code[0:8]
+        obj["vinLong"] = vin_code
+        collection.insert(obj)
+
 def peek_task(vin_code):
     data = do_task(vin_code)
+    if data:
+        insert_db(data, vin_code)
     print "result: %s" % (data)
 
 def loop_task():
@@ -47,10 +55,7 @@ def loop_task():
         if vin_code:
             print "vinCode: %s" % (vin_code)
             results = do_task(vin_code)
-            for result in results:
-                result["vinCode"] = vin_code[0:8]
-                result["vinLong"] = vin_code
-                collection.insert(result)
+            insert_db(result, vin_code)
             if len(result) == 0:
                 # Requeue
                 mq.publish(vin_code)
