@@ -4,6 +4,7 @@ import sys
 import os
 import requests
 import json
+import time
 from bs4 import BeautifulSoup
 
 ROOT_DIR = os.path.dirname(__file__)
