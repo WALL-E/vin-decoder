@@ -49,6 +49,7 @@ def loop_task():
             results = do_task(vin_code)
             for result in results:
                 result["vinCode"] = vin_code[0:8]
+                result["vinLong"] = vin_code
                 collection.insert(result)
             if len(result) == 0:
                 # Requeue
