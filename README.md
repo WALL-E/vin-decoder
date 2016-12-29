@@ -89,9 +89,12 @@ The 17 character VIN:
 ## 使用方法
 提供web查询服务
 
-* http://127.0.0.1/vin/v1/LVSHCAMB1CE054249
-* http://127.0.0.1/wmi/v1/LSV
-* http://127.0.0.1/vin/v1/checksum/LVSHCAMB1CE054249
+* 查询vin
+  * http://127.0.0.1/vin/v1/LVSHCAMB1CE054249
+* 查询wmi
+  * http://127.0.0.1/wmi/v1/LSV
+* 验证vin
+  * http://127.0.0.1/vin/v1/checksum/LVSHCAMB1CE054249
 
 请求
 ```shell
@@ -103,7 +106,7 @@ curl http://127.0.0.1/vin/v1/LVSHCAMB1CE054249
 {
   "status": "20000000",
   "message": "ok",
-  "result": {
+  "result": [{
     "vincode": "LVSHCAMB",
     "驱动形式": "前置前驱",
     "排量(升)": "1.6 L",
@@ -117,7 +120,7 @@ curl http://127.0.0.1/vin/v1/LVSHCAMB1CE054249
     "档位数": "5",
     "车型": "福克斯-两厢",
     "排放标准": "国4"
-  }
+  }]
 }
 ```
 ## 技术栈
