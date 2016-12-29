@@ -58,6 +58,7 @@ def robot_html(vinCode):
 
         print "[1]", response_1
         if response_1 is not None and response_1.status_code == 200:
+            proxy.requeue_server(server)
             cookies = response_1.cookies
             break
 
