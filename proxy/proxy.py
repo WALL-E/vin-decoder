@@ -13,6 +13,10 @@ def next_server():
     mq = RabbitMQ(queue="proxy")
     return mq.basic_get()
 
+def requeue_server(server):
+    mq = RabbitMQ(queue="proxy")
+    mq.publish(server)
+
 if __name__ == '__main__':
     proxy = next_server()
     if proxy:
