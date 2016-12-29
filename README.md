@@ -159,4 +159,4 @@ curl http://127.0.0.1/vin/v1/LVSHCAMB1CE054249
 
 mongodb实现了无模式，非常适合存储网络爬取到的数据，rabbitmq降低了多个模块的耦合性。
 
-(vin-decoder.jpg)
+![image](vin-decoder.jpg)
