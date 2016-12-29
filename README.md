@@ -155,7 +155,7 @@ curl http://127.0.0.1/vin/v1/LVSHCAMB1CE054249
   * 定时更新 
 
 ## 系统架构
-系统以来主要依赖两个组件
+系统主要依赖两个组件
 
 * mongodb
 * rabbitmq
