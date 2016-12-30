@@ -21,21 +21,21 @@ def parse_html(html):
     try:
         soup = BeautifulSoup(html, "html.parser")
         tables = soup.findAll('table')
-        table = tables[0]
 
-        tmp_list = []
-        for row in table.findAll('tr'):
-            for child in row.children:
-                ret = child.string.strip()
-                if len(ret) > 0:
-                    tmp_list.append(ret.encode("utf8"))
+        for table in tables[0:1]:
+            tmp_list = []
+            for row in table.findAll('tr'):
+                for child in row.children:
+                    ret = child.string.strip()
+                    if len(ret) > 0:
+                        tmp_list.append(ret.encode("utf8"))
 
-        tmp_dict = {}
-        for i in range(0, len(tmp_list), 2):
-            key = tmp_list[i]
-            val = tmp_list[i+1]
-            tmp_dict[key] = val
-        results.append(tmp_dict)
+            tmp_dict = {}
+            for i in range(0, len(tmp_list), 2):
+                key = tmp_list[i]
+                val = tmp_list[i+1]
+                tmp_dict[key] = val
+            results.append(tmp_dict)
     except Exception, msg:
         print "error: [parse html] %s" % (msg)
 
