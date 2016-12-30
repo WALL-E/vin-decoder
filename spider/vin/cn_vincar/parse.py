@@ -1,47 +1,45 @@
 #!/usr/bin/python
 # coding:utf-8
-#
-# 从Html文件中解析数据
-#
-
+"""
+从Html文件中解析车辆信息
+"""
 
 import sys
 import os
-from bs4 import BeautifulSoup
 import json
 
-
-def to_json(obj):
-    return json.dumps(obj, encoding='UTF-8', ensure_ascii=False)
+from bs4 import BeautifulSoup
 
 
 def parse_html(html):
     """
-    parse html of vin114.net
+    parse html of https://vincar.cn/
 
     :param html: html strings
-    :returns: dict or None
+    :returns: list
     """
+    results = []
     try:
         soup = BeautifulSoup(html, "html.parser")
         tables = soup.findAll('table')
-        
-        results = []
+
         for table in tables:
             result = {}
             for row in table.findAll('tr')[:-1]:
                 ths = row.findAll("th")
                 tds = row.findAll("td")
-                for i in (0,1):
+                for i in range(2):
                     result[ths[i].string] = tds[i].string
             results.append(result)
-        return results
     except Exception, msg:
         print "error: [parse html] %s" % (msg)
-        return None
+    return results
 
 
 def main():
+    """
+    main function
+    """
     if len(sys.argv) < 2:
         print "%s filename.html" % (sys.argv[0])
         sys.exit(1)
@@ -52,12 +50,8 @@ def main():
         sys.exit(1)
     html = open(filename)
     data = parse_html(html)
-    if data is None:
-        print "result:", data
-    else:
-        print "result:", json.dumps(data, encoding='UTF-8', ensure_ascii=False)
+    print "result:", json.dumps(data, encoding='UTF-8', ensure_ascii=False)
 
 
 if __name__ == "__main__":
     main()
-
