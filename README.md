@@ -85,6 +85,8 @@ The 17 character VIN:
 </tr>
 </tbody></table>
 
+## 兼容性测试
+目前，只在centos7.x上做了兼容性测试。
 
 ## 使用方法
 提供web查询服务
