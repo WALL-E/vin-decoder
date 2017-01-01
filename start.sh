@@ -7,6 +7,8 @@ then
     exit 1
 fi
 
+cd `dirname $0`
+
 mongodb/start.sh
 rabbitmq/start.sh
 

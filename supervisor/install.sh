@@ -7,6 +7,8 @@ then
     exit 1
 fi
 
+cd `dirname $0`
+
 /bin/cp -f vin-decoder.ini /etc/supervisord.d
 
 ret=$?
