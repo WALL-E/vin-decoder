@@ -7,4 +7,4 @@ then
     exit 1
 fi
 
-systemctl start mongod.service
+systemctl start mongod.service && echo "mongdb started"

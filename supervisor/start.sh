@@ -8,4 +8,4 @@ then
 fi
 
 
-supervisord
+pgrep supervisord >> /dev/null && echo "supervisord started" || supervisord
