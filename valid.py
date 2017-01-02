@@ -1,12 +1,19 @@
 #!/usr/bin/env python
+"""
+vin: checksum
+"""
 
 
-def checkSum(vincode):
+def check_sum(vincode):
     """
-    checkout length and checksum
+    checkout length, word and checksum
     """
+    if not isinstance(vincode, str) and not isinstance(vincode, unicode):
+        return False
     if len(vincode) != 17:
         return False
+
+    vincode = vincode.upper()
     if "I" in vincode or "O" in vincode or "Q" in vincode:
         return False
 
@@ -21,29 +28,44 @@ def checkSum(vincode):
         8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2
     ]
 
-    sum = 0
-    for i,v in enumerate(vincode):
+    total = 0
+    for index, value in enumerate(vincode):
         try:
-            tmp = table[v] * weight[i]
+            tmp = table[value] * weight[index]
         except KeyError:
             break
-        sum = sum + tmp
+        total = total + tmp
 
-    remainder = sum%11
+    remainder = total%11
     if remainder == 10:
-        remainder = "X"
+        return vincode[8] == 'X'
 
     return str(remainder) == vincode[8]
-        
+
 
 def main():
-    assert checkSum("LHGRC3838F8043791")
-    assert checkSum("WP0AA2987FK162906")
+    """
+    main function
+    """
+    assert check_sum(u"LHGRC3838F8043791")
+    assert check_sum("LhGRC3838F8043791")
 
-    assert not checkSum("AHGRC3838F8043791")
-    assert not checkSum("AP0AA2987FK162906")
+    assert check_sum("WP0AA2987FK162906")
+    assert check_sum("wP0AA2987FK162906")
 
-    assert not checkSum("aP0AA2987FK162906")
+    assert not check_sum("AHGRC3838F8043791")
+    assert not check_sum("AP0AA2987FK162906")
+
+    assert not check_sum("LHGRC3838F804379I")
+    assert not check_sum("LHGRC3838F804379O")
+    assert not check_sum("LHGRC3838F804379Q")
+
+
+    assert not check_sum("WP0AA2987FK16290")
+    assert not check_sum("WP0AA2987FK1629066")
+
+    assert not check_sum([])
+    assert not check_sum({})
 
     print "Unit test [ok]"
 
