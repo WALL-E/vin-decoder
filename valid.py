@@ -47,27 +47,33 @@ def main():
     """
     main function
     """
-    assert check_sum(u"LHGRC3838F8043791")
-    assert check_sum("LhGRC3838F8043791")
+    import sys
 
-    assert check_sum("WP0AA2987FK162906")
-    assert check_sum("wP0AA2987FK162906")
+    if len(sys.argv) > 1:
+        for vincode in sys.argv[1:]:
+            print "%s: %s" %(vincode, check_sum(vincode))
+    else:
+        assert check_sum(u"LHGRC3838F8043791")
+        assert check_sum("LhGRC3838F8043791")
 
-    assert not check_sum("AHGRC3838F8043791")
-    assert not check_sum("AP0AA2987FK162906")
+        assert check_sum("WP0AA2987FK162906")
+        assert check_sum("wP0AA2987FK162906")
 
-    assert not check_sum("LHGRC3838F804379I")
-    assert not check_sum("LHGRC3838F804379O")
-    assert not check_sum("LHGRC3838F804379Q")
+        assert not check_sum("AHGRC3838F8043791")
+        assert not check_sum("AP0AA2987FK162906")
+
+        assert not check_sum("LHGRC3838F804379I")
+        assert not check_sum("LHGRC3838F804379O")
+        assert not check_sum("LHGRC3838F804379Q")
 
 
-    assert not check_sum("WP0AA2987FK16290")
-    assert not check_sum("WP0AA2987FK1629066")
+        assert not check_sum("WP0AA2987FK16290")
+        assert not check_sum("WP0AA2987FK1629066")
 
-    assert not check_sum([])
-    assert not check_sum({})
+        assert not check_sum([])
+        assert not check_sum({})
 
-    print "Unit test [ok]"
+        print "Unit test [ok]"
 
 if __name__ == "__main__":
     main()
