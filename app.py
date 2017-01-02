@@ -9,6 +9,7 @@ ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
 sys.path.append(os.path.join(ROOT_DIR, 'mongodb'))
 sys.path.append(os.path.join(ROOT_DIR, 'rabbitmq'))
+sys.path.append(os.path.join(ROOT_DIR, 'utils'))
 
 from mongodb import MongoDB
 from vin import Vin
