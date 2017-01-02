@@ -1,5 +1,10 @@
 #!/bin/bash
 
-pgrep beam >> /dev/null || rabbitmq-server -detached
-rabbitmqctl start_app
-rabbitmq-plugins enable rabbitmq_management
+role=`id -u`
+if test $role -ne 0
+then
+    echo "运行脚本需要root权限"
+    exit 1
+fi
+
+systemctl start rabbitmq-server && echo "rabbitmq-server started"

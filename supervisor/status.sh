@@ -7,4 +7,4 @@ then
     exit 1
 fi
 
-systemctl stop supervisord
+systemctl status supervisord

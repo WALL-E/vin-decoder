@@ -7,4 +7,4 @@ then
     exit 1
 fi
 
-systemctl stop supervisord
+systemctl stop supervisord && echo "supervisord stoped"

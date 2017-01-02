@@ -17,7 +17,10 @@ EOF
 
 yum install -y supervisor.noarch
 yum install -y mongodb-org
-yum install -y rabbitmq-server
+
+rpm --import https://www.rabbitmq.com/rabbitmq-release-signing-key.asc
+yum -y install rabbitmq-server-3.6.6-1.noarch.rpm
+
 yum -y install python-setuptools.noarch
 yum -y install python-tornado.noarch
 yum -y install python-requests.noarch

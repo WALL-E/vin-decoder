@@ -7,5 +7,4 @@ then
     exit 1
 fi
 
-
-pgrep supervisord >> /dev/null && echo "supervisord started" || supervisord
+systemctl start supervisord && echo "supervisord started"

@@ -7,4 +7,4 @@ then
     exit 1
 fi
 
-systemctl stop mongod.service
+systemctl stop mongod.service && echo "mongdb stoped"
