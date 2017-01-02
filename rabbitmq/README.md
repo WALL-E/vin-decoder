@@ -27,4 +27,5 @@ http://localhost:15672/
 
 * 权限
   * rabbitmqctl list\_user\_permissions admin
-  * rabbitmqctl set\_permissions -p / admin '.*' '.*' '.*'
+  * rabbitmqctl set\_permissions -p / admin '.\*' '.\*' '.\*'
+  * rabbitmqctl clear\_permissions -p / admin
