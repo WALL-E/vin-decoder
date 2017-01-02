@@ -24,3 +24,7 @@ http://localhost:15672/
   * rabbitmqctl add\_user admin admin
   * rabbitmqctl change\_password admin admin
   * rabbitmqctl set\_user\_tags admin administrator
+
+* 权限
+  * rabbitmqctl list\_user\_permissions admin
+  * rabbitmqctl set\_permissions -p / admin '.*' '.*' '.*'
