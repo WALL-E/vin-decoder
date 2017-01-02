@@ -10,11 +10,11 @@ import copy
 import pymongo
 
 
-class Mongo(object):
+class MongoDB(object):
     """
-    Mongo Class
+    MongoDB Class
     """
-    def __init__(self, host="loclahost", port=27017, dbname="vin"):
+    def __init__(self, host="localhost", port=27017, dbname="vin"):
         self.host = host
         self.port = port
         self.conn = pymongo.MongoClient(self.host, self.port, maxPoolSize=500, connectTimeoutMS=100)
@@ -48,7 +48,7 @@ def main():
     """
     main function
     """
-    mongo = Mongo(host="172.28.32.101")
+    mongo = MongoDB(host="localhost")
     results = mongo.query_vin("LSVAM418")
     for result in results:
         print "vin:", type(result), result

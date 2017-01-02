@@ -20,7 +20,7 @@ sys.path.append(os.path.join(ROOT_DIR, '../../../mongodb'))
 import settings
 
 from rabbitmq import RabbitMQ
-from mongo import Mongo
+from mongodb import MongoDB
 from robot import robot_html
 from parse import parse_html
 
@@ -61,13 +61,13 @@ def do_task(vin_code):
 def do_once(vin_code):
     results = do_task(vin_code)
     if results:
-        Mongo().insert_vin(results)
+        MongoDB().insert_vin(results)
     print "result: %s" % (results)
 
 
 def do_loop():
     mq = RabbitMQ(queue="vin")
-    db = Mongo()
+    db = MongoDB()
     while True:
         vin_code = mq.basic_get()
         if vin_code:

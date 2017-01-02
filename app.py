@@ -10,7 +10,7 @@ sys.path.append(ROOT_DIR)
 sys.path.append(os.path.join(ROOT_DIR, 'mongodb'))
 sys.path.append(os.path.join(ROOT_DIR, 'rabbitmq'))
 
-from mongo import Mongo
+from mongodb import MongoDB
 from vin import Vin
 from rabbitmq import RabbitMQ
 import settings
@@ -158,7 +158,7 @@ class Application(tornado.web.Application):
             (r"/wmi/v1/(\w+)", WmiCodeHandler),
             (r"/vin/v1/checksum/(\w+)", VinChecksumHandler),
         ]
-        self.mongo = Mongo(host=settings.mongodb["host"])
+        self.mongo = MongoDB(host=settings.mongodb["host"])
         self.rabbitmq = RabbitMQ(host=settings.rabbitmq["host"])
         tornado.web.Application.__init__(self, handlers, debug=True)
 
