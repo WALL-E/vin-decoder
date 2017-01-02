@@ -1,8 +1,8 @@
 
 mongodb = {
-    "host": "172.28.32.101"
+    "host": "localhost"
 }
 
 rabbitmq = {
-    "host": "172.28.32.101"
+    "host": "localhost"
 }
