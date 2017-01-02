@@ -8,9 +8,9 @@ import requests
 
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
-sys.path.append(os.path.join(ROOT_DIR, '../rabbitmq'))
+sys.path.append(os.path.join(ROOT_DIR, '..'))
 
-from rabbitmq import RabbitMQ
+from rabbitmq.rabbitmq import RabbitMQ
 
 home_url = "http://ip.cn/"
 timeout = 10

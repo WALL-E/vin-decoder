@@ -5,14 +5,14 @@ import os
 
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
-sys.path.append(os.path.join(ROOT_DIR, '../rabbitmq'))
 
 from rabbitmq import RabbitMQ
 
 def peek(queue):
     mq = RabbitMQ(queue=queue)
     msg = mq.basic_get()
-    mq.publish(msg)
+    if msg:
+        mq.publish(msg)
     return msg
 
 if __name__ == '__main__':

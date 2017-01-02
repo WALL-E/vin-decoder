@@ -46,7 +46,7 @@ def callback(ch, method, properties, body):
 
 def main():
     import time
-    mq = RabbitMQ(host="172.28.32.101", queue="test")
+    mq = RabbitMQ(host="localhost", queue="test")
     for i in range(5):
         mq.publish("hello, world, @%f" % (time.time()))
     print "basic get:", mq.basic_get()

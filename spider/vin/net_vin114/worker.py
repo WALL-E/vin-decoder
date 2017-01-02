@@ -14,15 +14,15 @@ import requests
 
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
-sys.path.append(os.path.join(ROOT_DIR, '../../../rabbitmq'))
-sys.path.append(os.path.join(ROOT_DIR, '../../../mongodb'))
+sys.path.append(os.path.join(ROOT_DIR, '../../..'))
+sys.path.append(os.path.join(ROOT_DIR, '../../..'))
 
-import settings
-
-from rabbitmq import RabbitMQ
-from mongodb import MongoDB
+from rabbitmq.rabbitmq import RabbitMQ
+from mongodb.mongodb import MongoDB
 from robot import robot_html
 from parse import parse_html
+
+import settings
 
 
 def do_attach(objs, vin_code, origin):

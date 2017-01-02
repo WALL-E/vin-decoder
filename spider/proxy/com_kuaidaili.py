@@ -10,11 +10,10 @@ from bs4 import BeautifulSoup
 
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
-sys.path.append(os.path.join(ROOT_DIR, '../../rabbitmq'))
-sys.path.append(os.path.join(ROOT_DIR, '../../utils'))
+sys.path.append(os.path.join(ROOT_DIR, '../..'))
 
-from rabbitmq import RabbitMQ
-from downloader import get_page
+from rabbitmq.rabbitmq import RabbitMQ
+from utils.downloader import get_page
 
 
 def parse_html(html):

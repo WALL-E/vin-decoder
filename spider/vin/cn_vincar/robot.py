@@ -14,9 +14,9 @@ import requests
 
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
-sys.path.append(os.path.join(ROOT_DIR, '../../../proxy'))
+sys.path.append(os.path.join(ROOT_DIR, '../../..'))
 
-import proxy
+from proxy import proxy
 
 HOME_URL = "https://vincar.cn/"
 POST_URL = "https://vincar.cn/vin"

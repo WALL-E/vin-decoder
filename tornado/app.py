@@ -7,13 +7,11 @@ import json
 
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
-sys.path.append(os.path.join(ROOT_DIR, 'mongodb'))
-sys.path.append(os.path.join(ROOT_DIR, 'rabbitmq'))
-sys.path.append(os.path.join(ROOT_DIR, 'utils'))
+sys.path.append(os.path.join(ROOT_DIR, '..'))
 
-from mongodb import MongoDB
-from vin import Vin
-from rabbitmq import RabbitMQ
+from utils.vin import Vin
+from mongodb.mongodb import MongoDB
+from rabbitmq.rabbitmq import RabbitMQ
 import settings
 
 from spider.vin.com_51kahui import worker as com_51kahui_worker
