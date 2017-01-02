@@ -57,7 +57,7 @@ def get_page(url, proxy_use=True, proxy_reuse=False):
 
         print "response:", response
         if response is not None and response.status_code == 200:
-            html = response.text
+            html = response.text.encode(response.encoding)
             if proxy_use and proxy_reuse:
                 proxy.requeue_server(server)
             break

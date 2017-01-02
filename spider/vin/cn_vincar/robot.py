@@ -88,7 +88,7 @@ def robot_html(vin_code, proxy_use=True, proxy_reuse=False):
         return html
 
     # Get CSRF Token
-    soup = BeautifulSoup(response.text, "html.parser")
+    soup = BeautifulSoup(response.text.encode(response.encoding), "html.parser")
     tokens = soup.findAll('meta', {"name": "csrf-token"})
     token = tokens[0].attrs["content"]
     headers = copy.deepcopy(HEADERS_POST)
@@ -107,7 +107,7 @@ def robot_html(vin_code, proxy_use=True, proxy_reuse=False):
 
         print "[2]", response
         if response.status_code == 200:
-            html = response.text
+            html = response.text.encode(response.encoding)
             break
 
     return html

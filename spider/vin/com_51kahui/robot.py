@@ -51,7 +51,7 @@ def robot_html(vin_code, proxy_use=True, proxy_reuse=False):
         if response is not None and response.status_code == 200:
             if proxy_use and proxy_reuse:
                 proxy.requeue_server(server)
-            html = response.text
+            html = response.text.encode(response.encoding)
             break
 
     if response is None:

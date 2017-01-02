@@ -102,9 +102,9 @@ def robot_html(vin_code, proxy_use=True, proxy_reuse=False):
 
         print "[2]", response
         if response.status_code == 200:
-            result = response.text
+            result = response.text.encode(response.encoding)
             result = json.loads(result)
-            print "[2] result:", json.dumps(result, encoding='UTF-8', ensure_ascii=False)
+            print "[2] result: %s" % (result)
             if result["code"].startswith("S") and result["code"] != "S0":
                 url = DATA_URL % (result["message"]["levelIds"], result["message"]["vinDate"])
             break
@@ -123,7 +123,7 @@ def robot_html(vin_code, proxy_use=True, proxy_reuse=False):
             continue
 
     if response is not None:
-        html = response.text
+        html = response.text.encode(response.encoding)
 
     return html
 
