@@ -7,7 +7,9 @@ then
     exit 1
 fi
 
-mongodb/stop.sh
-rabbitmq/stop.sh
-supervisor/stop.sh
+cd `dirname $0`
+
+../mongodb/start.sh
+../rabbitmq/start.sh
+../supervisor/start.sh
 

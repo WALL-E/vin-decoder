@@ -9,7 +9,7 @@ fi
 
 cd `dirname $0`
 
-mongodb/start.sh
-rabbitmq/start.sh
-supervisor/start.sh
+../mongodb/stop.sh
+../rabbitmq/stop.sh
+../supervisor/stop.sh
 

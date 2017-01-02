@@ -9,7 +9,7 @@ fi
 
 cd `dirname $0`
 
-mongodb/status.sh
-rabbitmq/status.sh
-supervisor/status.sh
+../mongodb/status.sh
+../rabbitmq/status.sh
+../supervisor/status.sh
 
