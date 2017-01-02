@@ -7,4 +7,8 @@ then
     exit 1
 fi
 
+cd `dirname $0`
+
 systemctl start rabbitmq-server && echo "rabbitmq-server started"
+
+./init.sh
