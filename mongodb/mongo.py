@@ -4,6 +4,7 @@ mongo python module
 """
 
 import pymongo
+import copy
 
 
 class Mongo(object):
@@ -36,7 +37,8 @@ class Mongo(object):
         """
         collection = self.database["vin"]
         for obj in objs:
-            collection.insert(obj)
+            tmp = copy.deepcopy(obj)
+            collection.insert(tmp)
 
 
 def main():
