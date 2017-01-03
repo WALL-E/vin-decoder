@@ -30,15 +30,12 @@ class Mongo(object):
         collection = self.database["wmi"]
         return collection.find({"wmiCode":wmi_code})
 
-    def insert_vin(self, objs, vin_code, origin="unknown"):
+    def insert_vin(self, objs):
         """
         insert vin collection, vinCode and vinLong
         """
         collection = self.database["vin"]
         for obj in objs:
-            obj["vinCode"] = vin_code[0:8]
-            obj["vinLong"] = vin_code
-            obj["origin"] = origin
             collection.insert(obj)
 
 

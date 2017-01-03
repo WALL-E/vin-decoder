@@ -8,6 +8,7 @@ import sys
 import json
 import os
 import time
+import copy
 
 import requests
 
@@ -24,6 +25,17 @@ from robot import robot_html
 from parse import parse_html
 
 
+def do_attach(objs, vin_code, origin):
+    """
+    additional data: vinCode,vinLong,origin
+    """
+    for obj in objs:
+        obj["vinCode"] = vin_code[0:8]
+        obj["vinLong"] = vin_code
+        obj["origin"] = origin
+    return objs
+
+
 def do_task(vin_code):
     """
     Execute query VIN task
@@ -36,7 +48,7 @@ def do_task(vin_code):
     if html is not None:
         results = parse_html(html)  
         if results:
-            return results
+            return do_attach(results, vin_code, settings.ORIGIN)
         else:
             print "[1] %s not found, parse html failed" % (vin_code)
     else:
@@ -47,7 +59,7 @@ def do_task(vin_code):
 def do_once(vin_code):
     results = do_task(vin_code)
     if results:
-        Mongo().insert_vin(results, vin_code, origin=settings.ORIGIN)
+        Mongo().insert_vin(results)
     print "result: %s" % (results)
 
 
@@ -60,7 +72,7 @@ def do_loop():
             print "vinCode: %s" % (vin_code)
             results = do_task(vin_code)
             if results:
-                db.insert_vin(results, vin_code)
+                db.insert_vin(results)
             else:
                 # Requeue
                 mq.publish(vin_code)
