@@ -29,10 +29,12 @@ def do_attach(objs, vin_code, origin):
     """
     additional data: vinCode,vinLong,origin
     """
+    now = time.strftime('%Y-%m-%dT%H:%M:%S', time.localtime(time.time()))
     for obj in objs:
         obj["vinCode"] = vin_code[0:8]
         obj["vinLong"] = vin_code
         obj["origin"] = origin
+        obj["timestamp"] = now
     return objs
 
 
@@ -44,7 +46,7 @@ def do_task(vin_code):
     :returns: list or None
     """
     print "do_task(): %s" % (vin_code)
-    html = robot_html(vin_code, proxy_use=True, proxy_reuse=False)
+    html = robot_html(vin_code, proxy_use=settings.PROXY_USE, proxy_reuse=settings.PROXY_REUSE)
     if html is not None:
         results = parse_html(html)  
         if results:
