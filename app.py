@@ -103,7 +103,6 @@ class VinCodeHandler(tornado.web.RequestHandler):
                 "status": "40400000",
                 "message": "not found",
             }
-            RabbitMQ().publish(vinobj.get_vin())
             if is_realtime:
                 workers = [worker for worker in WORKERS if worker["enable"]]
                 for worker in workers:
@@ -114,7 +113,10 @@ class VinCodeHandler(tornado.web.RequestHandler):
                             "message": "ok",
                             "result": data
                         }
+                        Mongo().insert_vin(data)
                         break
+            if res["status"] != "20000000":
+                RabbitMQ().publish(vinobj.get_vin())
             self.write(json.dumps(res, ensure_ascii=False))
         else:
             lists = []
