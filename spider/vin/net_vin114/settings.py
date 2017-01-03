@@ -5,3 +5,5 @@ spider settings
 """
 
 ORIGIN="http://www.vin114.net/"
+PROXY_USE=True
+PROXY_REUSE=True

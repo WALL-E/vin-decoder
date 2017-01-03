@@ -5,3 +5,5 @@ spider settings
 """
 
 ORIGIN="https://vincar.cn/"
+PROXY_USE=False
+PROXY_REUSE=False
