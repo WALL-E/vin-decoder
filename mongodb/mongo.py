@@ -38,7 +38,7 @@ class Mongo(object):
         collection = self.database["vin"]
         for obj in objs:
             tmp = copy.deepcopy(obj)
-            collection.insert(tmp)
+            collection.insert_one(tmp)
 
 
 def main():
