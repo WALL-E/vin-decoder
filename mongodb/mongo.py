@@ -3,15 +3,23 @@
 mongo python module
 """
 
-import pymongo
+import sys
+import os
 import copy
+
+import pymongo
+
+ROOT_DIR = os.path.dirname(__file__)
+sys.path.append(ROOT_DIR)
+
+import settings
 
 
 class Mongo(object):
     """
     Mongo Class
     """
-    def __init__(self, host="localhost", port=27017, dbname="vin"):
+    def __init__(self, host=settings.HOST, port=settings.PORT, dbname="vin"):
         self.host = host
         self.port = port
         self.conn = pymongo.MongoClient(self.host, self.port)
