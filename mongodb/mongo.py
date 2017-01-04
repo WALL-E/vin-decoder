@@ -9,17 +9,12 @@ import copy
 
 import pymongo
 
-ROOT_DIR = os.path.dirname(__file__)
-sys.path.append(ROOT_DIR)
-
-import mognodb_settings
-
 
 class Mongo(object):
     """
     Mongo Class
     """
-    def __init__(self, host=mognodb_settings.HOST, port=mognodb_settings.PORT, dbname="vin"):
+    def __init__(self, host="loclahost", port=27017, dbname="vin"):
         self.host = host
         self.port = port
         self.conn = pymongo.MongoClient(self.host, self.port, maxPoolSize=500, connectTimeoutMS=100)
@@ -53,7 +48,7 @@ def main():
     """
     main function
     """
-    mongo = Mongo()
+    mongo = Mongo(host="172.28.32.101")
     results = mongo.query_vin("LSVAM418")
     for result in results:
         print "vin:", type(result), result
