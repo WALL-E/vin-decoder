@@ -9,8 +9,6 @@ fi
 
 cd `dirname $0`
 
-supervisor/install.sh
-
 mongodb/start.sh
 rabbitmq/start.sh
 supervisor/start.sh
