@@ -11,7 +11,7 @@ cd `dirname $0`
 
 ./install.sh
 
-command -v systemctl
+command -v systemctl > /dev/null
 ret=$?
 if test $ret -ne 0
 then

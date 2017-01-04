@@ -9,7 +9,7 @@ fi
 
 cd `dirname $0`
 
-command -v systemctl
+command -v systemctl > /dev/null
 ret=$?
 if test $ret -ne 0
 then
