@@ -9,10 +9,10 @@ import pika
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
 
-import settings
+import rabbitmq_settings
 
 class RabbitMQ(object):
-    def __init__(self, host=settings.HOST, port=settings.PORT, queue="vin"):
+    def __init__(self, host=rabbitmq_settings.HOST, port=rabbitmq_settings.PORT, queue="vin"):
         self.host = host
         self.port = port
         self.queue = queue

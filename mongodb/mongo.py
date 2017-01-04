@@ -12,17 +12,17 @@ import pymongo
 ROOT_DIR = os.path.dirname(__file__)
 sys.path.append(ROOT_DIR)
 
-import settings
+import mognodb_settings
 
 
 class Mongo(object):
     """
     Mongo Class
     """
-    def __init__(self, host=settings.HOST, port=settings.PORT, dbname="vin"):
+    def __init__(self, host=mognodb_settings.HOST, port=mognodb_settings.PORT, dbname="vin"):
         self.host = host
         self.port = port
-        self.conn = pymongo.MongoClient(self.host, self.port)
+        self.conn = pymongo.MongoClient(self.host, self.port, maxPoolSize=500, connectTimeoutMS=100)
         self.database = self.conn[dbname]
 
     def query_vin(self, vin_code):

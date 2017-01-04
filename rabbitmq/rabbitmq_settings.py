@@ -4,5 +4,5 @@
 rabbitmq settings
 """
 
-HOST="localhost"
+HOST="172.28.32.101"
 PORT=5672
