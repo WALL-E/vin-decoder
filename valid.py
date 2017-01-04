@@ -36,11 +36,11 @@ def check_sum(vincode):
             break
         total = total + tmp
 
-    remainder = total%11
-    if remainder == 10:
+    products = total%11
+    if products == 10:
         return vincode[8] == 'X'
 
-    return str(remainder) == vincode[8]
+    return str(products) == vincode[8]
 
 
 def main():
