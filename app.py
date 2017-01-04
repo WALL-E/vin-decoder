@@ -35,17 +35,14 @@ WORKERS = [
 ]
 
 try:
+    import tornado.httpserver
     import tornado.ioloop
     import tornado.web
-    import tornado.escape
     from tornado.options import define, options
 except ImportError:
     print "Notify service need tornado, please run depend.sh"
     sys.exit(1)
 
-
-ROOT_DIR = os.path.dirname(__file__)
-sys.path.append(ROOT_DIR)
 
 define("port", default=10090, help="run on the given port", type=int)
 define('debug', default=True, help='enable debug mode')
@@ -97,7 +94,7 @@ class VinCodeHandler(tornado.web.RequestHandler):
             }
             self.write(json.dumps(res, ensure_ascii=False))
             return
-        results = Mongo().query_vin(vinobj.get_wmi()+vinobj.get_vds())
+        results = self.application.mongo.query_vin(vinobj.get_wmi()+vinobj.get_vds())
         if results.count() == 0:
             res = {
                 "status": "40400000",
@@ -113,10 +110,10 @@ class VinCodeHandler(tornado.web.RequestHandler):
                             "message": "ok",
                             "result": data
                         }
-                        Mongo().insert_vin(data)
+                        self.application.mongo.insert_vin(data)
                         break
             if res["status"] != "20000000":
-                RabbitMQ().publish(vinobj.get_vin())
+                self.application.rabbitmq.publish(vinobj.get_vin())
             self.write(json.dumps(res, ensure_ascii=False))
         else:
             lists = []
@@ -135,7 +132,7 @@ class WmiCodeHandler(tornado.web.RequestHandler):
     def get(self, wmicode):
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Content-Type", "application/json;charset=UTF-8")
-        result = Mongo().query_wmi(wmicode)
+        result = self.application.mongo.query_wmi(wmicode)
         if result is None:
             res = {
                 "status": "40400000",
@@ -152,21 +149,24 @@ class WmiCodeHandler(tornado.web.RequestHandler):
             self.write(json.dumps(res, ensure_ascii=False))
 
 
+class Application(tornado.web.Application):
+    def __init__(self):
+        handlers = [
+            (r"/", MainHandler),
+            (r"/vin/v1/(\w+)", VinCodeHandler),
+            (r"/wmi/v1/(\w+)", WmiCodeHandler),
+            (r"/vin/v1/checksum/(\w+)", VinChecksumHandler),
+        ]
+        self.mongo = Mongo()
+        self.rabbitmq = RabbitMQ()
+        tornado.web.Application.__init__(self, handlers, debug=True)
+
+
 def  main():
     tornado.options.parse_command_line()
 
-    settings = {
-        'debug': options.debug,
-    }
-
-    application = tornado.web.Application([
-        (r"/", MainHandler),
-        (r"/vin/v1/(\w+)", VinCodeHandler),
-        (r"/wmi/v1/(\w+)", WmiCodeHandler),
-        (r"/vin/v1/checksum/(\w+)", VinChecksumHandler),
-    ], **settings)
-
-    application.listen(options.port)
+    http_server = tornado.httpserver.HTTPServer(Application())
+    http_server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
 
 
