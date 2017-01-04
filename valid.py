@@ -8,15 +8,10 @@ def check_sum(vincode):
     """
     checkout length, word and checksum
     """
-    if not isinstance(vincode, str) and not isinstance(vincode, unicode):
-        return False
-    if len(vincode) != 17:
-        return False
-
-    vincode = vincode.upper()
-    if "I" in vincode or "O" in vincode or "Q" in vincode:
-        return False
-
+    maps = "0123456789X"
+    weights = [
+        8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2
+    ]
     table = {
         "0": 0, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9,
         "A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7, "H": 8,
@@ -24,23 +19,27 @@ def check_sum(vincode):
         "S": 2, "T": 3, "U": 4, "V": 5, "W": 6, "X": 7, "Y": 8, "Z": 9,
     }
 
-    weight = [
-        8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2
-    ]
+    if not isinstance(vincode, str) and not isinstance(vincode, unicode):
+        return False
+
+    if len(vincode) != 17:
+        return False
+
+    vincode = vincode.upper()
+    if "I" in vincode or "O" in vincode or "Q" in vincode:
+        return False
 
     total = 0
     for index, value in enumerate(vincode):
         try:
-            tmp = table[value] * weight[index]
+            products = table[value] * weights[index]
         except KeyError:
             break
-        total = total + tmp
+        total = total + products
 
-    products = total%11
-    if products == 10:
-        return vincode[8] == 'X'
+    index = total%11
 
-    return str(products) == vincode[8]
+    return maps[index] == vincode[8]
 
 
 def main():
