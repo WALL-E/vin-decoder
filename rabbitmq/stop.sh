@@ -7,4 +7,11 @@ then
     exit 1
 fi
 
-systemctl stop rabbitmq-server && echo "rabbitmq-server stoped"
+command -v systemctl
+ret=$?
+if test $ret -ne 0
+then
+    service rabbitmq-server stop && echo "rabbitmq-server stoped"
+else
+    systemctl stop rabbitmq-server && echo "rabbitmq-server stoped"
+fi

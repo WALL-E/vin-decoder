@@ -7,4 +7,11 @@ then
     exit 1
 fi
 
-systemctl stop supervisord && echo "supervisord stoped"
+command -v systemctl
+ret=$?
+if test $ret -ne 0
+then
+    service supervisord stop && echo "supervisord stoped"
+else
+    systemctl stop supervisord && echo "supervisord stoped"
+fi

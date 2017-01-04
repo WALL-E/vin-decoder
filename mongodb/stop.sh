@@ -7,4 +7,11 @@ then
     exit 1
 fi
 
-systemctl stop mongod.service && echo "mongdb stoped"
+command -v systemctl
+ret=$?
+if test $ret -ne 0
+then
+    service mongod stop && echo "mongdb stoped"
+else
+    systemctl stop mongod.service && echo "mongdb stoped"
+fi

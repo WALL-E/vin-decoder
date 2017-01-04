@@ -9,6 +9,13 @@ fi
 
 cd `dirname $0`
 
-systemctl start rabbitmq-server && echo "rabbitmq-server started"
+command -v systemctl
+ret=$?
+if test $ret -ne 0
+then
+    service rabbitmq-server start && echo "rabbitmq-server started"
+else
+    systemctl start rabbitmq-server && echo "rabbitmq-server started"
+fi
 
 ./init.sh

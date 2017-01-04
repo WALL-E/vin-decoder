@@ -7,4 +7,11 @@ then
     exit 1
 fi
 
-systemctl start mongod.service && echo "mongdb started"
+command -v systemctl
+ret=$?
+if test $ret -ne 0
+then
+    service mongod start && echo "mongdb started"
+else
+    systemctl start mongod.service && echo "mongdb started"
+fi

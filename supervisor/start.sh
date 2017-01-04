@@ -10,4 +10,12 @@ fi
 cd `dirname $0`
 
 ./install.sh
-systemctl start supervisord && echo "supervisord started"
+
+command -v systemctl
+ret=$?
+if test $ret -ne 0
+then
+    service supervisord start && echo "supervisord started"
+else
+    systemctl start supervisord && echo "supervisord started"
+fi

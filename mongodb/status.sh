@@ -7,4 +7,11 @@ then
     exit 1
 fi
 
-systemctl status mongod.service
+command -v systemctl
+ret=$?
+if test $ret -ne 0
+then
+    service mongod status
+else
+    systemctl status mongod.service
+fi

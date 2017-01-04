@@ -7,4 +7,11 @@ then
     exit 1
 fi
 
-systemctl status rabbitmq-server
+command -v systemctl
+ret=$?
+if test $ret -ne 0
+then
+    service rabbitmq-server status
+else
+    systemctl status rabbitmq-server
+fi

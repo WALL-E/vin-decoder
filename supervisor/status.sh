@@ -7,4 +7,11 @@ then
     exit 1
 fi
 
-systemctl status supervisord
+command -v systemctl
+ret=$?
+if test $ret -ne 0
+then
+    service supervisord status
+else
+    systemctl status supervisord
+fi
