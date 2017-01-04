@@ -13,6 +13,7 @@ sys.path.append(os.path.join(ROOT_DIR, 'rabbitmq'))
 from mongo import Mongo
 from vin import Vin
 from rabbitmq import RabbitMQ
+import settings
 
 from spider.vin.com_51kahui import worker as com_51kahui_worker
 from spider.vin.net_vin114 import worker as net_vin114_worker
@@ -157,8 +158,8 @@ class Application(tornado.web.Application):
             (r"/wmi/v1/(\w+)", WmiCodeHandler),
             (r"/vin/v1/checksum/(\w+)", VinChecksumHandler),
         ]
-        self.mongo = Mongo()
-        self.rabbitmq = RabbitMQ()
+        self.mongo = Mongo(host=settings.mongodb["host"])
+        self.rabbitmq = RabbitMQ(host=settings.rabbitmq["host"])
         tornado.web.Application.__init__(self, handlers, debug=True)
 
 
