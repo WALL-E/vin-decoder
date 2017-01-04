@@ -6,13 +6,9 @@ import os
 
 import pika
 
-ROOT_DIR = os.path.dirname(__file__)
-sys.path.append(ROOT_DIR)
-
-import rabbitmq_settings
 
 class RabbitMQ(object):
-    def __init__(self, host=rabbitmq_settings.HOST, port=rabbitmq_settings.PORT, queue="vin"):
+    def __init__(self, host="localhost", port=5672, queue="vin"):
         self.host = host
         self.port = port
         self.queue = queue
@@ -50,7 +46,7 @@ def callback(ch, method, properties, body):
 
 def main():
     import time
-    mq = RabbitMQ(queue="test")
+    mq = RabbitMQ(host="172.28.32.101", queue="test")
     for i in range(5):
         mq.publish("hello, world, @%f" % (time.time()))
     print "basic get:", mq.basic_get()
