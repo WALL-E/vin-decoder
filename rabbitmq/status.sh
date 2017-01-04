@@ -7,7 +7,7 @@ then
     exit 1
 fi
 
-command -v systemctl
+command -v systemctl > /dev/null
 ret=$?
 if test $ret -ne 0
 then
