@@ -7,4 +7,7 @@ then
     exit 1
 fi
 
+cd `dirname $0`
+
+./install.sh
 systemctl start supervisord && echo "supervisord started"
