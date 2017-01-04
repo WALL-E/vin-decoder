@@ -4,7 +4,7 @@ vin: checksum
 """
 
 
-def check_sum(vincode):
+def valid(vincode):
     """
     checkout length, word and checksum
     """
@@ -50,27 +50,27 @@ def main():
 
     if len(sys.argv) > 1:
         for vincode in sys.argv[1:]:
-            print "%s: %s" %(vincode, check_sum(vincode))
+            print "%s: %s" %(vincode, valid(vincode))
     else:
-        assert check_sum(u"LHGRC3838F8043791")
-        assert check_sum("LhGRC3838F8043791")
+        assert valid(u"LHGRC3838F8043791")
+        assert valid("LhGRC3838F8043791")
 
-        assert check_sum("WP0AA2987FK162906")
-        assert check_sum("wP0AA2987FK162906")
+        assert valid("WP0AA2987FK162906")
+        assert valid("wP0AA2987FK162906")
 
-        assert not check_sum("AHGRC3838F8043791")
-        assert not check_sum("AP0AA2987FK162906")
+        assert not valid("AHGRC3838F8043791")
+        assert not valid("AP0AA2987FK162906")
 
-        assert not check_sum("LHGRC3838F804379I")
-        assert not check_sum("LHGRC3838F804379O")
-        assert not check_sum("LHGRC3838F804379Q")
+        assert not valid("LHGRC3838F804379I")
+        assert not valid("LHGRC3838F804379O")
+        assert not valid("LHGRC3838F804379Q")
 
 
-        assert not check_sum("WP0AA2987FK16290")
-        assert not check_sum("WP0AA2987FK1629066")
+        assert not valid("WP0AA2987FK16290")
+        assert not valid("WP0AA2987FK1629066")
 
-        assert not check_sum([])
-        assert not check_sum({})
+        assert not valid([])
+        assert not valid({})
 
         print "Unit test [ok]"
 
