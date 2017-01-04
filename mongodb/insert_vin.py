@@ -25,7 +25,7 @@ data = {
     "档位数": "8",
     "燃油类型": "汽油",
 }
-collection.insert(data)
+collection.insert_one(data)
 
 data = {
     "vinCode": "LVSHCAMB1CE054249"[0:8],
@@ -42,5 +42,5 @@ data = {
     "VIN年份": "2012", 
     "燃油类型": "汽油"
 }
-collection.insert(data)
+collection.insert_one(data)
 
