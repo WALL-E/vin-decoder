@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python2.7
 # coding:utf-8
 """
 从Html文件中解析车辆信息
