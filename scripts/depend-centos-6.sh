@@ -15,7 +15,6 @@ gpgcheck=0
 enabled=1
 EOF
 
-yum install -y supervisor.noarch
 yum install -y http://oerp142a4.bkt.clouddn.com/mongodb-org-server-3.0.14-1.el6.x86_64.rpm
 
 rpm --import https://www.rabbitmq.com/rabbitmq-release-signing-key.asc
@@ -37,4 +36,5 @@ pip install beautifulsoup4
 pip install pika
 pip install ipy
 pip install ipaddress
-pip install pylint
+pip install http://oerp142a4.bkt.clouddn.com/pylint-1.6.4.tar.gz
+pip install http://oerp142a4.bkt.clouddn.com/supervisor-3.3.1.tar.gz
