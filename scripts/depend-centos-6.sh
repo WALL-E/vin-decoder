@@ -30,11 +30,10 @@ command -v curl || yum -y install curl || exit 1
 command -v netstat || yum -y install net-tools || exit 1
 command -v lsof || yum -y install lsof || exit 1
 
-easy_install pip
-pip install pymongo
-pip install pika
-pip install ipy
-pip install ipaddress
-pip install http://oerp142a4.bkt.clouddn.com/beautifulsoup4-4.5.3.tar.gz
-pip install http://oerp142a4.bkt.clouddn.com/pylint-1.6.4.tar.gz
-pip install http://oerp142a4.bkt.clouddn.com/supervisor-3.3.1.tar.gz
+pip2.7 install pymongo
+pip2.7 install pika
+pip2.7 install ipy
+pip2.7 install ipaddress
+pip2.7 install http://oerp142a4.bkt.clouddn.com/beautifulsoup4-4.5.3.tar.gz
+pip2.7 install http://oerp142a4.bkt.clouddn.com/pylint-1.6.4.tar.gz
+pip2.7 install http://oerp142a4.bkt.clouddn.com/supervisor-3.3.1.tar.gz
