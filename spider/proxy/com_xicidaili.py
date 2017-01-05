@@ -40,7 +40,7 @@ def parse_html(html):
 
 
 def main():
-    home_url = "http://www.xicidaili.com/"
+    home_url = "http://www.xicidaili.com/nn/"
     while True:
         html = get_page(home_url, proxy_use=False)
         parse_html(html)
