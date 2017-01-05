@@ -32,9 +32,9 @@ command -v lsof || yum -y install lsof || exit 1
 
 easy_install pip
 pip install pymongo
-pip install beautifulsoup4
 pip install pika
 pip install ipy
 pip install ipaddress
+pip install http://oerp142a4.bkt.clouddn.com/beautifulsoup4-4.5.3.tar.gz
 pip install http://oerp142a4.bkt.clouddn.com/pylint-1.6.4.tar.gz
 pip install http://oerp142a4.bkt.clouddn.com/supervisor-3.3.1.tar.gz
