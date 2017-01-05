@@ -15,27 +15,25 @@ gpgcheck=0
 enabled=1
 EOF
 
-yum install -y supervisor.noarch
 yum install -y mongodb-org
 
 rpm --import https://www.rabbitmq.com/rabbitmq-release-signing-key.asc
-yum -y install rabbitmq-server-3.6.6-1.noarch.rpm
-
-yum -y install python-setuptools.noarch
-yum -y install python-tornado.noarch
-yum -y install python-requests.noarch
-yum -y install supervisor.noarch
+yum -y install rabbitmq-server
 
 command -v wget || yum -y install wget || exit 1
 command -v curl || yum -y install curl || exit 1
 command -v netstat || yum -y install net-tools || exit 1
 command -v lsof || yum -y install lsof || exit 1
 
-easy_install pip
-pip install pymongo
-pip install beautifulsoup4
-pip install pika
-pip install ipy
-pip install ipaddress
-pip install pylint
+command -v python2.7 || curl https://raw.githubusercontent.com/WALL-E/static/master/setup/redhat/install_python27|bash
+
+pip2.7 install http://oerp142a4.bkt.clouddn.com/pymongo-3.4.0.tar.gz
+pip2.7 install http://oerp142a4.bkt.clouddn.com/beautifulsoup4-4.5.3.tar.gz
+pip2.7 install http://oerp142a4.bkt.clouddn.com/pylint-1.6.4.tar.gz
 pip2.7 install http://oerp142a4.bkt.clouddn.com/requests-2.12.4.tar.gz
+pip2.7 install http://oerp142a4.bkt.clouddn.com/supervisor-3.3.1.tar.gz
+pip2.7 install http://oerp142a4.bkt.clouddn.com/certifi-2016.9.26.tar.gz
+pip2.7 install http://oerp142a4.bkt.clouddn.com/tornado-4.4.2.tar.gz
+pip2.7 install http://oerp142a4.bkt.clouddn.com/pika-0.10.0.tar.gz
+pip2.7 install http://oerp142a4.bkt.clouddn.com/IPy-0.83.tar.gz
+pip2.7 install http://oerp142a4.bkt.clouddn.com/ipaddress-1.0.17.tar.gz
