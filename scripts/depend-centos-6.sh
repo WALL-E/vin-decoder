@@ -37,3 +37,4 @@ pip2.7 install http://oerp142a4.bkt.clouddn.com/pymongo-3.4.0.tar.gz
 pip2.7 install http://oerp142a4.bkt.clouddn.com/beautifulsoup4-4.5.3.tar.gz
 pip2.7 install http://oerp142a4.bkt.clouddn.com/pylint-1.6.4.tar.gz
 pip2.7 install http://oerp142a4.bkt.clouddn.com/supervisor-3.3.1.tar.gz
+pip2.7 install http://oerp142a4.bkt.clouddn.com/requests-2.12.4.tar.gz

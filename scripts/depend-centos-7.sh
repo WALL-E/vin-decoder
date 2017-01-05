@@ -38,3 +38,4 @@ pip install pika
 pip install ipy
 pip install ipaddress
 pip install pylint
+pip2.7 install http://oerp142a4.bkt.clouddn.com/requests-2.12.4.tar.gz
