@@ -42,7 +42,7 @@ def parse_html(html):
 
 
 def main():
-    pages = 3
+    pages = 2
     home_url =  ["http://www.kuaidaili.com/free/intr/%s/"%(i) for i in range(1, pages)]
     while True:
         for url in home_url:
