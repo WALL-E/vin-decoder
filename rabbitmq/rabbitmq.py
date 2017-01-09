@@ -13,10 +13,15 @@ class RabbitMQ(object):
         self.port = port
         self.queue = queue
         self.credentials = pika.PlainCredentials('admin', 'admin')
+        self.connect()
+
+    def connect(self):
         self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters(self.host, self.port, '/', self.credentials))
+                    pika.ConnectionParameters(self.host, self.port, '/', self.credentials))
 
     def publish(self, content):
+        if not self.connection.is_open:
+            self.connect()
         channel = self.connection.channel()
         channel.queue_declare(queue=self.queue)
         channel.basic_publish(exchange='', routing_key=self.queue, body=content)
